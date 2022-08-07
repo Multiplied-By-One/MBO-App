@@ -1,4 +1,19 @@
 const functions = require("firebase-functions");
+const admin = require('firebase-admin');
+
+/**
+ * Get DB in cloud function
+ */
+admin.initializeApp();
+const db = admin.firestore();
+
+module.exports.onUserCreate = functions.auth.user().onCreate((user) => {
+  console.log(JSON.stringify(user))
+  db.doc(`users/${user.uid}`).set({
+    id: user.uid,
+    displayName: user.displayName
+  });
+});
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions

@@ -3,6 +3,9 @@
     "rules": "./firebase/firestore/firestore.rules",
     "indexes": "./firebase/firestore/firestore.indexes.json"
   },
+  "functions": {
+    "source": "./firebase/functions"
+  },
   "emulators": {
     "auth": {
       "port": 9099

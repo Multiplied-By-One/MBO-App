@@ -1,0 +1,26 @@
+{
+    "uid": "XFkiFVdKmPwkzvtPYiqqQkaXAubg",
+    "email": "algae.otter.814@example.com",
+    "emailVerified": true,
+    "displayName": "Algae Otter",
+    "photoURL": null,
+    "phoneNumber": null,
+    "disabled": false,
+    "passwordHash": null,
+    "passwordSalt": null,
+    "tokensValidAfterTime": null,
+    "metadata": {
+        "lastSignInTime": "2022-08-07T20:02:08.523Z"
+    },
+    "customClaims": {},
+    "providerData": [
+        {
+            "providerId": "google.com",
+            "rawId": "9828212656631074383997541539362054269564",
+            "federatedId": "9828212656631074383997541539362054269564",
+            "displayName": "Algae Otter",
+            "email": "algae.otter.814@example.com",
+            "screenName": "otter_algae"
+        }
+    ]
+}
