@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth"
+import { getAuth, connectAuthEmulator } from "firebase/auth"
 
 const firebaseConfig = {
   apiKey: "AIzaSyDu8n17p63quhK72NsQJ0QDh6gWAO_v_SA",
@@ -11,6 +11,17 @@ const firebaseConfig = {
   appId: "1:994837742283:web:c9edb4ac24cc993b51d14e"
 };
 
+
 // Initialize Firebase
-export const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+
 export const auth = getAuth(app)
+
+// Attach emulator in the event it has been enabled
+if(
+  process.env.NODE_ENV === 'development' &&
+  process.env.REACT_APP_FIREBASE_EMULATOR_ENABLED === 'true'
+) {
+  connectAuthEmulator(auth, process.env.REACT_APP_FIREBASE_AUTH_EMULATOR_HOST)
+}
+

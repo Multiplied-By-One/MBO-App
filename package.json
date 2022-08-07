@@ -6,7 +6,9 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "concurrently": "^7.3.0",
     "firebase": "^9.9.2",
+    "firebase-tools": "^11.4.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-firebase-hooks": "^5.0.3",
@@ -27,7 +29,9 @@
     "workbox-streams": "^6.5.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently 'npm run start:react' 'npm run start:firebase'",
+    "start:react": "react-scripts start",
+    "start:firebase": "firebase emulators:start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
