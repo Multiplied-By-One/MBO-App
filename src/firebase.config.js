@@ -1,0 +1,16 @@
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth"
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDu8n17p63quhK72NsQJ0QDh6gWAO_v_SA",
+  authDomain: "mbo-app-1df4e.firebaseapp.com",
+  databaseURL: "https://mbo-app-1df4e-default-rtdb.firebaseio.com",
+  projectId: "mbo-app-1df4e",
+  storageBucket: "mbo-app-1df4e.appspot.com",
+  messagingSenderId: "994837742283",
+  appId: "1:994837742283:web:c9edb4ac24cc993b51d14e"
+};
+
+// Initialize Firebase
+export const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app)
