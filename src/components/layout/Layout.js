@@ -1,14 +1,16 @@
+import { Container } from '@mui/material';
 import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
 import darkTheme from '../../theme/darkTheme';
+import NavBar from '../nav/NavBar';
 
 
 const Layout = ({ children }) => {
   return (<StyledEngineProvider injectFirst>
-    {/* @todo -- Refactpr this to pull the theme from a configurable source! */}
+    {/* @todo -- Refactor this to pull the theme from a configurable source! */}
     <ThemeProvider theme={darkTheme}>
-      <div className="App">
+      <Container maxWidth="lg">
         {children}
-      </div>
+      </Container>
     </ThemeProvider>
   </StyledEngineProvider>)
 }
