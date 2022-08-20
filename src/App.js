@@ -1,17 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+// Import fonts
+import '@fontsource/walter-turncoat/index.css';
+import "@fontsource/economica/index.css"; // Weight 400.
+import "@fontsource/francois-one/index.css"; // Weight 400.
 
 import AuthRouter from './routes/AuthRouter';
 
 import { BrowserRouter } from 'react-router-dom';
 import useAuthedUser from './hooks/user/useAuthedUser';
+import Layout from './components/layout/Layout';
 
 function App() {
   const [user, loading, error] = useAuthedUser()
   return (
     <BrowserRouter>
-      <div className="App">
+      <Layout>
         {loading && "loading..."}
 
         {error && "Error"}
@@ -20,7 +24,7 @@ function App() {
           <AuthRouter/>:
           `Logged in as ${JSON.stringify(user)}`
         }
-      </div>
+      </Layout>
     </BrowserRouter>
   );
 }
