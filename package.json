@@ -31,9 +31,11 @@
     "workbox-streams": "^6.5.4"
   },
   "scripts": {
+    "prestart": "npm run kill:firebase",
     "start": "concurrently --names \"react,firebase\" \"npm run start:react\" \"npm run start:firebase\"",
     "start:react": "react-scripts start",
     "start:firebase": "firebase emulators:start",
+    "kill:firebase": "kill-port 4000 8080 3000 5001 9099",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -55,5 +57,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "kill-port": "^2.0.1"
   }
 }

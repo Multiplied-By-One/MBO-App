@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, connectAuthEmulator } from "firebase/auth"
+import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDu8n17p63quhK72NsQJ0QDh6gWAO_v_SA",
@@ -16,6 +17,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app)
+export const firestore = getFirestore(app)
 
 // Attach emulator in the event it has been enabled
 if(
@@ -23,5 +25,11 @@ if(
   process.env.REACT_APP_FIREBASE_EMULATOR_ENABLED === 'true'
 ) {
   connectAuthEmulator(auth, process.env.REACT_APP_FIREBASE_AUTH_EMULATOR_HOST)
+  connectFirestoreEmulator(
+    firestore,
+    process.env.REACT_APP_FIREBASE_FIRESTORE_EMULATOR_HOST,
+    Number(process.env.REACT_APP_FIREBASE_FIRESTORE_EMULATOR_PORT)
+  )
+
 }
 

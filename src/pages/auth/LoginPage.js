@@ -9,7 +9,7 @@ function LoginPage() {
     loading,
     error
   ] = useSignInWithGoogle(auth)
-
+  
   return (
     <>
       <div>LoginPage</div>

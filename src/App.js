@@ -1,13 +1,14 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { auth } from './firebase.config';
+
 import AuthRouter from './routes/AuthRouter';
-import { useAuthState } from 'react-firebase-hooks/auth'
+
 import { BrowserRouter } from 'react-router-dom';
+import useAuthedUser from './hooks/user/useAuthedUser';
 
 function App() {
-  const [user, loading, error] = useAuthState(auth)
+  const [user, loading, error] = useAuthedUser()
   return (
     <BrowserRouter>
       <div className="App">
