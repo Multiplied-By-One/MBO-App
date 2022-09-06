@@ -6,7 +6,8 @@ export default createTheme(baseTheme, {
     themeName: 'MBO Dark',
     palette: {
         text:{
-            primary: "#FFFFFF"
+            primary: "#FFFFFF",
+            secondery: "#FFFFFF"
         },
         primary: {
             main: '#222222',
@@ -14,6 +15,7 @@ export default createTheme(baseTheme, {
         },
         secondary: {
             main: '#5f1c17',
+            background: '#242220'
         },
         inputBorderColor: {
             color: '#FFFFFF',

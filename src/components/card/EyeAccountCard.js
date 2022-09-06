@@ -20,8 +20,8 @@ const EyeAccountCard = ({headline, gender, age}) => {
 
 EyeAccountCard.propTypes = {
     headline: PropTypes.string.isRequired,
-    gender: PropTypes.oneOf(["Male", "Female"]), // @todo Confirm either a list of genders here or if this should be free form
-    age: PropTypes.number
+    gender: PropTypes.oneOf(["male", "female", "other"]), // @todo Confirm either a list of genders here or if this should be free form
+    age: PropTypes.string
 }
 
 export default EyeAccountCard

@@ -1,5 +1,4 @@
 import { collection } from "firebase/firestore";
-import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { firestore } from "../../firebase.config";
 import useAuthedUser from "./useAuthedUser"
 
@@ -10,19 +9,17 @@ import useAuthedUser from "./useAuthedUser"
  * @param {*} options 
  * @returns 
  */
-const useUserScopedCollectionData = (collectionPath, query, options) => {
+const useUserScopedCollection = (collectionPath) => {
   const [user, userLoading, userError] = useAuthedUser()
-  const collectionQuery = user !== undefined
+  const targetCollection = user !== undefined
     ? collection(firestore, `users/${user.uid}/${collectionPath}`) :
     null
-  const [data, collectionLoading, collectionError, snapshot] = useCollectionData(collectionQuery, options)
 
   return [
-    data,
-    userLoading || collectionLoading,
-    userError ?? collectionError,
-    snapshot
+    targetCollection,
+    userLoading,
+    userError
   ]
 }
 
-export default useUserScopedCollectionData
+export default useUserScopedCollection
