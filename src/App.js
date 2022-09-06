@@ -10,9 +10,12 @@ import AuthRouter from './routes/AuthRouter';
 import { BrowserRouter } from 'react-router-dom';
 import useAuthedUser from './hooks/user/useAuthedUser';
 import Layout from './components/layout/Layout';
+import AppRouter from './routes/AppRouter';
+
 
 function App() {
   const [user, loading, error] = useAuthedUser()
+  const router = !user ? <AuthRouter/>: <AppRouter/>
   return (
     <BrowserRouter>
       <Layout>
@@ -20,10 +23,7 @@ function App() {
 
         {error && "Error"}
 
-        {!user ?
-          <AuthRouter/>:
-          `Logged in as ${JSON.stringify(user)}`
-        }
+        {!loading && router}
       </Layout>
     </BrowserRouter>
   );
