@@ -1,6 +1,5 @@
 import * as React from "react";
 import {
-  //AppBar,
   Toolbar,
   Box,
   Container,
@@ -17,7 +16,7 @@ import MuiAppBar from "@mui/material/AppBar";
 import { alpha, styled, useTheme } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import SideBar from "./SideBar";
+import MobileSideBar from "./MobileSideBar";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 
@@ -103,9 +102,7 @@ const AppBar = styled(MuiAppBar, {
   ...(!open && {
     width: `calc(100% - ${4.3}rem)`,
   }),
-  "@media (max-width: 600px)": {
-    width: "100%",
-  },
+
   backgroundColor: theme.palette.primary.main,
   border: `2px solid ${theme.palette.secondary.main}`,
   borderRadius: `0 0 12px 12px`,
@@ -131,36 +128,9 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-//const navStyle = {
-//  backgroundColor: "#222222",
-//  position: "sticky",
-//  top: "0px",
-//  display: "flex",
-//  flexDirection: "row-reverse",
-//  borderRadius: "0",
-//  zIndex: "10",
-//};
-//const ulStyle = {
-//  marginRight: "10px",
-//};
-//const liStyle = {
-//  display: "inline",
-//  margin: "0 10px",
-//};
-//const navBarLogo = {
-//  width: "100px",
-//  position: "absolute",
-//  left: "5px",
-//  top: "5px",
-//};
-
 const NavBar = ({ title, content }, props) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-
-  const handleDrawerToggle = () => {
-    setOpen(!open);
-  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -171,8 +141,6 @@ const NavBar = ({ title, content }, props) => {
   };
   const drawerContent = (
     <div>
-      {/* <Toolbar />
-      <Divider /> */}
       <List>
         <>
           {navList.map((route, index) => (
@@ -288,7 +256,7 @@ const NavBar = ({ title, content }, props) => {
           </Box>
         </Box>
         <Box sx={{ display: { xs: "block", sm: "none" } }}>
-          <SideBar />
+          <MobileSideBar title={title} drawer={drawerContent} />
         </Box>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
