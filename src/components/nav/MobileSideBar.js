@@ -18,8 +18,6 @@ const AppBar = styled(MuiAppBar)(({ theme }) => ({
   border: `2px solid ${theme.palette.secondary.main}`,
   borderRadius: `0 0 12px 12px`,
   maxWidth: theme.breakpoints.lg,
-  //display: "flex",
-  //alignItems: "center",
 }));
 
 const MobileSideBar = ({ title, drawer }) => {
