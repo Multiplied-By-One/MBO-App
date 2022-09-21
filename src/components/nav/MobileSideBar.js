@@ -49,16 +49,13 @@ const MobileSideBar = ({ title, drawer }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Box as="div">
+          <Toolbar sx={[theme.typography.title, { fontSize: "1.2rem" }]}>
             {title ?? (
-              <Typography as="h4" fontFamily={"Walter Turncoat"}>
-                Multiplied By{" "}
-                <Typography component="span" fontFamily={"Funky Olive"}>
-                  One
-                </Typography>
+              <Typography variant="title" sx={{ fontSize: "inherit" }}>
+                Multiplied By <Typography variant="caption">One</Typography>
               </Typography>
             )}
-          </Box>
+          </Toolbar>
           <Box as="div"></Box>
         </Toolbar>
       </AppBar>
