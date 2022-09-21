@@ -94,13 +94,9 @@ const routes = [
 const AppRouter = () => {
   return (
     <Routes>
-      {routes.map((route, index) => (
-        <Route path={route.path} element={route.element()} key={index} />
+      {routes.map((route) => (
+        <Route path={route.path} element={route.element()} key={route.path} />
       ))}
-      {/* <Route path="*" element={"Page Not Found"} />
-        <Route path="/" element={"Hub page TBC"} />
-       <Route path="/eyeAccount" element={<EyeAccountListingPage />} />
-       <Route path="/eyeAccount/new" element={<EyeAccountCreationPage />} /> */}
     </Routes>
   );
 };

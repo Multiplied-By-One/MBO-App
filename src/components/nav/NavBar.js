@@ -1,9 +1,7 @@
-import * as React from "react";
+import { useState, Fragment } from "react";
 import {
   Toolbar,
   Box,
-  Container,
-  Grid,
   Typography,
   CssBaseline,
   Divider,
@@ -13,23 +11,17 @@ import {
 } from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
-import { alpha, styled, useTheme } from "@mui/material/styles";
+import { styled, useTheme } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import MobileSideBar from "./MobileSideBar";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-
-// const SyledAppBar = styled(AppBar)(({ theme }) => ({
-//   backgroundColor: theme.palette.primary.background,
-//   border: `2px solid ${theme.palette.secondary.main}`,
-//   borderRadius: `0 0 12px 12px`,
-//   maxWidth: theme.breakpoints.lg,
-// }));
+import CloseIcon from "@mui/icons-material/Close";
 
 const drawerWidth = 190;
 
-// navList1
+// navList
 const navList = [
   {
     name: "Dashboard",
@@ -59,6 +51,7 @@ const openedMixin = (theme) => ({
   }),
   overflowX: "hidden",
   overflowY: "hidden",
+  justifyContent: "flex-start",
 });
 
 const closedMixin = (theme) => ({
@@ -77,8 +70,9 @@ const closedMixin = (theme) => ({
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  justifyContent: "flex-start",
+  justifyContent: "flex-end",
   padding: theme.spacing(0, 1),
+  height: "40px",
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
@@ -86,7 +80,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
-  //zIndex: theme.zIndex.drawer + 1,
   transition: theme.transitions.create(["width", "margin"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -116,7 +109,6 @@ const Drawer = styled(MuiDrawer, {
 })(({ theme, open }) => ({
   width: drawerWidth,
   flexShrink: 0,
-  // whiteSpace: "nowrap",
 
   ...(open && {
     ...openedMixin(theme),
@@ -130,7 +122,7 @@ const Drawer = styled(MuiDrawer, {
 
 const NavBar = ({ title, content }, props) => {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -144,7 +136,7 @@ const NavBar = ({ title, content }, props) => {
       <List>
         <>
           {navList.map((route, index) => (
-            <React.Fragment key={index}>
+            <Fragment key={index}>
               <ListItem
                 button
                 style={{ textAlign: "center", padding: "0 10px" }}
@@ -179,9 +171,9 @@ const NavBar = ({ title, content }, props) => {
                   backgroundColor: theme.palette.primary.background,
                 }}
               />
-            </React.Fragment>
+            </Fragment>
           ))}
-          <ListItem sx={{ justifyContent: "center", alignSelf: "flex-end" }}>
+          <ListItem sx={{ justifyContent: "center" }}>
             <Divider
               sx={{
                 backgroundColor: theme.palette.primary.background,
@@ -204,13 +196,10 @@ const NavBar = ({ title, content }, props) => {
         <Box sx={{ display: { xs: "none", sm: "block" } }}>
           <CssBaseline />
           <AppBar position="fixed" open={open}>
-            <Toolbar>
+            <Toolbar sx={theme.typography.title}>
               {title ?? (
-                <Typography as="h4" fontFamily={"Walter Turncoat"}>
-                  Multiplied By{" "}
-                  <Typography component="span" fontFamily={"Funky Olive"}>
-                    One
-                  </Typography>
+                <Typography variant="title">
+                  Multiplied By <Typography variant="caption">One</Typography>
                 </Typography>
               )}
             </Toolbar>
@@ -222,7 +211,6 @@ const NavBar = ({ title, content }, props) => {
           >
             <Drawer
               variant="permanent"
-              //anchor="left"
               open={open}
               PaperProps={{
                 sx: {
@@ -242,9 +230,9 @@ const NavBar = ({ title, content }, props) => {
                   color="inherit"
                   aria-label="open drawer"
                   onClick={!open ? handleDrawerOpen : handleDrawerClose}
-                  edge="start"
+                  edge="center"
                 >
-                  <MenuIcon />
+                  {open ? <CloseIcon /> : <MenuIcon />}
                 </IconButton>
               </DrawerHeader>
               <Divider

@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import MuiAppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -7,6 +7,7 @@ import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { styled, useTheme } from "@mui/material/styles";
@@ -18,12 +19,10 @@ const AppBar = styled(MuiAppBar)(({ theme }) => ({
   border: `2px solid ${theme.palette.secondary.main}`,
   borderRadius: `0 0 12px 12px`,
   maxWidth: theme.breakpoints.lg,
-  //display: "flex",
-  //alignItems: "center",
 }));
 
 const MobileSideBar = ({ title, drawer }) => {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
 
   const handleDrawerToggle = () => {
@@ -68,13 +67,12 @@ const MobileSideBar = ({ title, drawer }) => {
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true,
           }}
           sx={{
             display: { xs: "block", sm: "none" },
@@ -96,7 +94,15 @@ const MobileSideBar = ({ title, drawer }) => {
             },
           }}
         >
-          <Toolbar />
+          <IconButton
+            color="inherit"
+            aria-label="close drawer"
+            edge="end"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 0, justifyContent: "flex-end", p: 2 }}
+          >
+            <CloseIcon />
+          </IconButton>
           <Divider />
           {drawer}
         </Drawer>

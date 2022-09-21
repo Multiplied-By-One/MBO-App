@@ -1,20 +1,24 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from "@mui/material/styles";
 
 export default createTheme({
-  themeName: 'MBO Base',
+  themeName: "MBO Base",
   typography: {
     h6: {
-      fontFamily: 'Walter Turncoat',
+      fontFamily: "Walter Turncoat",
     },
     subtitle1: {
-      fontFamily: 'Francois One',
+      fontFamily: "Francois One",
     },
     body1: {
-      fontFamily: 'Economica',
+      fontFamily: "Economica",
     },
     caption: {
-      fontFamily: 'Funky Olive',
-      fontSize: '20%',
-    }
-  }
-})
+      fontFamily: "Funky Olive",
+      fontSize: "inherit",
+    },
+    title: {
+      fontFamily: "Walter Turncoat",
+      fontSize: "1.8rem",
+    },
+  },
+});
