@@ -8,6 +8,7 @@
     "@fontsource/economica": "^4.5.8",
     "@fontsource/francois-one": "^4.5.8",
     "@fontsource/walter-turncoat": "^4.5.6",
+    "@mui/icons-material": "^5.10.3",
     "@mui/material": "^5.10.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
