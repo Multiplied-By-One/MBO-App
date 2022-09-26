@@ -20,6 +20,13 @@ To get started you will need to have installed:
 
 Make sure to install the [firebase emulator](https://firebase.google.com/docs/emulator-suite/install_and_configure) (and required dependencies)
 
+run the following to install project dependencies run following:
+```bash
+npm i 
+cd firebase/functions
+npm i
+```
+
 > Warning: This will terminate any processes bound to port 4000, 8080, 3000, 5001 and 9099,
 
 Run the following command to start the stack:
