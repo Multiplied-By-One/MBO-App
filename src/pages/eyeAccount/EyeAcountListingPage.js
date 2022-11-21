@@ -13,7 +13,11 @@ const EyeAccountListingPage = () => {
         <Grid>
           {data.map((item) => (
             <Grid key={item.id} item sm="12" lg="4" xl="3">
-              <EyeAccountCard headline={item.name} age={item.age} />
+              <EyeAccountCard
+                headline={item.name}
+                gender={item.gender}
+                age={item.age}
+              />
             </Grid>
           ))}
         </Grid>

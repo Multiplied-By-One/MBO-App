@@ -9,7 +9,6 @@ admin.initializeApp();
 const db = admin.firestore();
 
 module.exports.onUserCreate = functions.auth.user().onCreate((user) => {
-  console.log(JSON.stringify(user))
   db.doc(`users/${user.uid}`).set({
     id: user.uid,
     displayName: user.displayName,
