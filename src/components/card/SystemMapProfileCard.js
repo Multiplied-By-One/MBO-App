@@ -24,8 +24,8 @@ const SystemMapProfileCard = ({ id, headline, gender, age }) => {
     return <StyledCard key={id}>
         <div>
             <Typography as="h1" fontFamily={"Funky Olive"}>{headline}</Typography>
-            <Typography as="h1" fontFamily={"Walter Turncoat"}>{gender}</Typography>
-            <Typography as="h1" fontFamily={"Walter Turncoat"}>Age {age}</Typography>
+            <Typography as="h1" fontFamily={"Francois One"}>{gender[0].toUpperCase() + gender.substring(1)}</Typography>
+            <Typography as="h1" fontFamily={"Francois One"}>Age {age}</Typography>
         </div>
         <StyledProfilePicture>
             <img alt="profile-pic" src="" />
