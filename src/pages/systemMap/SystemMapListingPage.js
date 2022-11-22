@@ -37,7 +37,7 @@ const SystemMapListingPage = () => {
         id: 5,
         name: "John Q",
         gender: "male",
-        age: "unknown"
+        age: "Unknown"
     },
   ]
   return (
