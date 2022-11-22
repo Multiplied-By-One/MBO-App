@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import EyeAccountCreationPage from "../pages/eyeAccount/EyeAccountCreationPage";
 import EyeAccountListingPage from "../pages/eyeAccount/EyeAcountListingPage";
-
+import SystemMapListingPage from "../pages/systemMap/SystemMapListingPage";
 // routes
 const routes = [
   {
@@ -32,7 +32,7 @@ const routes = [
   {
     path: "/system-map",
     exact: true,
-    element: () => "System Map",
+    element: () => <SystemMapListingPage />,
   },
   {
     path: "/expressway",
