@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import EyeAccountCreationPage from "../pages/eyeAccount/EyeAccountCreationPage";
-import EyeAccountListingPage from "../pages/eyeAccount/EyeAcountListingPage";
 import SystemMapListingPage from "../pages/systemMap/SystemMapListingPage";
 // routes
 const routes = [
@@ -18,11 +17,6 @@ const routes = [
     path: "/dashboard",
     exact: true,
     element: () => "Dashboard",
-  },
-  {
-    path: "/eyeAccount",
-    exact: true,
-    element: () => <EyeAccountListingPage />,
   },
   {
     path: "/headmate-meeting-space",
@@ -85,7 +79,7 @@ const routes = [
     element: () => "Sign Out",
   },
   {
-    path: "/eyeAccount/new",
+    path: "/eye-account/new",
     exact: true,
     element: () => <EyeAccountCreationPage />,
   },
