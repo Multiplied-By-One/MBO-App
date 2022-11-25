@@ -2,6 +2,8 @@ import { Card, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import PropTypes from "prop-types";
 
+import { capitalizeText } from "../../helper/fontHelper";
+
 const StyledCard = styled(Card)(({ theme }) => ({
   backgroundColor: theme.palette.primary.background,
   border: `2px solid ${theme.palette.secondary.main}`,
@@ -28,7 +30,7 @@ const SystemMapProfileCard = ({ id, headline, gender, age }) => {
           {headline}
         </Typography>
         <Typography as="h1" fontFamily={"Francois One"}>
-          {gender[0].toUpperCase() + gender.substring(1)}
+          {capitalizeText(gender)}
         </Typography>
         <Typography as="h1" fontFamily={"Francois One"}>
           Age {age}
