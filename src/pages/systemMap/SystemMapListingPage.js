@@ -5,7 +5,7 @@ import Page from "../../components/page/Page";
 import useUserScopedCollectionData from "../../hooks/user/useUserScopedCollectionData";
 
 const SystemMapListingPage = () => {
-  //The parameter of useUserScopedCollectionData needs to updated with correct collectionPath
+
   const [profileData, loading, error] = useUserScopedCollectionData("eyeAccounts");
 
   return (
