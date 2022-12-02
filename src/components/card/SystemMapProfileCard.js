@@ -2,8 +2,6 @@ import { Card, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import PropTypes from "prop-types";
 
-import { capitalizeText } from "../../helper/fontHelper";
-
 const StyledCard = styled(Card)(({ theme }) => ({
   backgroundColor: theme.palette.primary.background,
   border: `2px solid ${theme.palette.secondary.main}`,
@@ -29,8 +27,12 @@ const SystemMapProfileCard = ({ id, headline, gender, age }) => {
         <Typography as="h1" fontFamily={"Funky Olive"}>
           {headline}
         </Typography>
-        <Typography as="h1" fontFamily={"Francois One"}>
-          {capitalizeText(gender)}
+        <Typography
+          as="h1"
+          fontFamily={"Francois One"}
+          sx={{ textTransform: "capitalize" }}
+        >
+          {gender}
         </Typography>
         <Typography as="h1" fontFamily={"Francois One"}>
           Age {age}
@@ -42,12 +44,10 @@ const SystemMapProfileCard = ({ id, headline, gender, age }) => {
     </StyledCard>
   );
 };
-
 SystemMapProfileCard.propTypes = {
   id: PropTypes.number,
   headline: PropTypes.string.isRequired,
   gender: PropTypes.oneOf(["male", "female", "other"]), // @todo Confirm either a list of genders here or if this should be free form
   age: PropTypes.string,
 };
-
 export default SystemMapProfileCard;
