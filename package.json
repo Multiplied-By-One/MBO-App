@@ -58,7 +58,7 @@
       "prettier --write"
     ],
     "src/**/**.js": [
-      "./node_modules/.bin/eslint — fix"
+      "./node_modules/.bin/eslint --fix"
     ]
   },
   "eslintConfig": {
