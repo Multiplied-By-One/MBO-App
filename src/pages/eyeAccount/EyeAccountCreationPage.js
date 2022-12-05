@@ -47,7 +47,7 @@ const EyeAccountCreationPage = () => {
       setIsSubmitting(true);
       try {
         await addDoc(collection, values);
-        navigate("/eyeAccount");
+        navigate("/system-map");
       } catch (e) {
         console.error(e);
       } finally {
