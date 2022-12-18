@@ -43,13 +43,11 @@
   "scripts": {
     "prestart": "npm run kill:firebase",
     "start": "concurrently --names \"react,firebase\" \"npm run start:react\" \"npm run start:firebase \"",
-    "start:react": "react-scripts start",
+    "start:react": "vite --port=3000",
     "start:firebase": "firebase emulators:start --import ./firebase/emulator_data",
     "kill:firebase": "kill-port 4000 8080 3000 5001 9099",
     "export:firebase": "firebase emulators:export firebase/emulator_data",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "vite build"
   },
   "eslintConfig": {
     "extends": [
@@ -70,6 +68,10 @@
     ]
   },
   "devDependencies": {
-    "kill-port": "^2.0.1"
+    "@vitejs/plugin-react": "^3.0.0",
+    "kill-port": "^2.0.1",
+    "vite": "^4.0.1",
+    "vite-plugin-svgr": "^2.4.0",
+    "vite-tsconfig-paths": "^4.0.3"
   }
 }

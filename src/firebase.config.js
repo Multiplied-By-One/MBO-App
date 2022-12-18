@@ -20,15 +20,16 @@ export const auth = getAuth(app)
 export const firestore = getFirestore(app)
 
 // Attach emulator in the event it has been enabled
+console.log([import.meta.env.DEV, import.meta.env.VITE_FIREBASE_EMULATOR_ENABLED])
 if(
-  process.env.NODE_ENV === 'development' &&
-  process.env.REACT_APP_FIREBASE_EMULATOR_ENABLED === 'true'
+  import.meta.env.DEV &&
+  import.meta.env.VITE_FIREBASE_EMULATOR_ENABLED === 'true'
 ) {
-  connectAuthEmulator(auth, process.env.REACT_APP_FIREBASE_AUTH_EMULATOR_HOST)
+  connectAuthEmulator(auth, import.meta.env.VITE_FIREBASE_AUTH_EMULATOR_HOST)
   connectFirestoreEmulator(
     firestore,
-    process.env.REACT_APP_FIREBASE_FIRESTORE_EMULATOR_HOST,
-    Number(process.env.REACT_APP_FIREBASE_FIRESTORE_EMULATOR_PORT)
+    import.meta.env.VITE_FIREBASE_FIRESTORE_EMULATOR_HOST,
+    Number(import.meta.env.VITE_FIREBASE_FIRESTORE_EMULATOR_PORT)
   )
 
 }
