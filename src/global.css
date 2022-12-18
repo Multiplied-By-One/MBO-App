@@ -1,8 +1,8 @@
 @font-face {
-  font-family: 'Funky Olive';
-  src: url('./styles/fonts/funky-olive/FunkyOlive-Mixed.woff2') format('woff2'),
-      url('./styles/fonts/funky-olive/FunkyOlive-Mixed.woff') format('woff'),
-      url('./styles/fonts/funky-olive/FunkyOlive-Mixed.ttf') format('truetype');
+  font-family: "Funky Olive";
+  src: url("./styles/fonts/funky-olive/FunkyOlive-Mixed.woff2") format("woff2"),
+    url("./styles/fonts/funky-olive/FunkyOlive-Mixed.woff") format("woff"),
+    url("./styles/fonts/funky-olive/FunkyOlive-Mixed.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -10,14 +10,14 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }

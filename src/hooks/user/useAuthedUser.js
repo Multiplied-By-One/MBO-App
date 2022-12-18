@@ -1,8 +1,8 @@
-import { auth } from './../../firebase.config';
-import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth } from "./../../firebase.config";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const useAuthedUser = () => {
-    return useAuthState(auth)
-}
+  return useAuthState(auth);
+};
 
-export default useAuthedUser
+export default useAuthedUser;
