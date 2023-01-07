@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import AccountSetup from "../pages/accountSetup/AccountSetup";
 import EyeAccountCreationPage from "../pages/eyeAccount/EyeAccountCreationPage";
 import SystemMapListingPage from "../pages/systemMap/SystemMapListingPage";
 // routes
@@ -82,6 +83,11 @@ const routes = [
     path: "/eye-account/new",
     exact: true,
     element: () => <EyeAccountCreationPage />,
+  },
+  {
+    path: "/account-setup",
+    exact: true,
+    element: () => <AccountSetup />,
   },
 ];
 

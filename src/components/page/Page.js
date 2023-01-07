@@ -15,7 +15,7 @@ const Page = ({ title, children }) => {
     <Layout>
       <NavBar
         title={title}
-        content={<StyledContainer maxWidth="lg">{children}</StyledContainer>}
+        content={<StyledContainer maxWidth="false" >{children}</StyledContainer>}
       />
     </Layout>
   );
