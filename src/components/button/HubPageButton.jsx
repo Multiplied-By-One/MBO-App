@@ -9,11 +9,16 @@ const StyledLink = styled(Link)(({ theme }) => ({
     color: theme.palette.text.primary,
     textAlign: "center",
     boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.5)",
-    lineHeight: "100px",
-    borderRadius: "50px",
+    lineHeight: "25px",
+    borderRadius: "5px",
     textDecoration: "none",
-    width: "300px",
-    display: "block"
+    width: "200px",
+    display: "block",
+    [theme.breakpoints.up('sm')]: {
+        width: "300px",
+        borderRadius: "50px",
+        lineHeight: "100px",
+    }
 }))
   
 

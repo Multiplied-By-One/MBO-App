@@ -8,8 +8,7 @@ import { styled } from "@mui/material/styles";
 const StyledContainer = styled(Container)(({ theme }) => ({
   paddingTop: "30px",
   backgroundColor: "inherit",
-  // Full width minus the width of the drawer
-  width: "calc(100vw - 190px)",
+  // Push right for drawer
   [theme.breakpoints.up('sm')]: {
     paddingLeft: "60px",
   }

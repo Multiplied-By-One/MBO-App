@@ -192,7 +192,7 @@ const NavBar = ({ title, content }, props) => {
 
   return (
     <>
-      <Box className="aaa" sx={{ display: "flex" }}>
+      <Box sx={{ display: "flex", padding: 0}}>
         <Box sx={{ display: { xs: "none", sm: "block" }, width: 0 }}>
           <CssBaseline />
           <AppBar position="fixed" open={open}>
@@ -204,7 +204,7 @@ const NavBar = ({ title, content }, props) => {
               )}
             </Toolbar>
           </AppBar>
-          <Box className="aaa3"
+          <Box
             component="nav"
             sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
             aria-label="sidebar navigation"
