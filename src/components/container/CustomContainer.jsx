@@ -12,7 +12,6 @@ const StyledContainer = styled(Container)(({theme}) => ({
     boxShadow: `5px 5px 3px -1px #131415`,//${theme.palette.primary.main}`,
     borderRadius: 12,
     padding: 0,
-
     justifyContent: 'center',
     alignItems: 'center',
     color: theme.palette.text.primary,
