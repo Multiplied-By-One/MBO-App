@@ -3,22 +3,17 @@ import {
   CircularProgress,
   FormControl,
   FormHelperText,
-  Input,
-  InputLabel,
   styled,
-  MenuItem,
-  Select,
   Box,
   Checkbox,
 } from "@mui/material";
 import * as yup from "yup";
 import { useFormik } from "formik";
-import useUserScopedCollection from "../../hooks/user/useUserScopesCollection";
-import { addDoc } from "firebase/firestore";
+import FirestoreDocumentData from "../../hooks/user/useUserScopeDocument";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Page from "../../components/page/Page";
-
+import { updateDoc } from "firebase/firestore";
 import CustomContainer from "../../components/container/CustomContainer";
 import CustomSelect from "../../components/customSelect/CustomSelect";
 import { Typography } from "@mui/material";
@@ -41,10 +36,6 @@ const accountSetupSchema = yup.object({
     .max(25, "Please select a main text point size from 10 to 30"),
   systemName: yup.string().required("Please enter a system name"),
 });
-// const getFormikInputProps = (formik, fieldName) => ({
-//   value: formik.values[fieldName],
-//   onChange: formik.handleChange,
-// });
 
 const StyledCheckbox = styled(Checkbox)(({ theme }) => ({
   color: `white`,
@@ -94,7 +85,7 @@ const StyledImg = styled("img")(() => ({
 }));
 
 const AccountSetupPage = () => {
-  const [collection, loading, error] = useUserScopedCollection("eyeAccounts");
+  const [docRef, loading, error] = FirestoreDocumentData();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
@@ -112,17 +103,17 @@ const AccountSetupPage = () => {
     validationSchema: accountSetupSchema,
     onSubmit: async (values) => {
       //TODO: Uncomment and delete next line after test
-      // setIsSubmitting(true);
-      // try {
-      //   await addDoc(collection, values);
-      //   navigate("/eyeAccount");
-      // } catch (e) {
-      //   console.error(e);
-      // } finally {
-      //   setIsSubmitting(false);
-      // }
-      await sleep(500);
-      alert(JSON.stringify(values, null, 2));
+      setIsSubmitting(true);
+      try {
+        await sleep(500);
+        alert(JSON.stringify(values, null, 2));
+        await updateDoc(docRef,{ userPreferences: values });
+        //navigate("/eyeAccount");
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setIsSubmitting(false);
+      }
     },
   });
 
@@ -152,7 +143,7 @@ const AccountSetupPage = () => {
       <Page>
         <StyledContainer>
           {loading && <CircularProgress />}
-          {collection && (
+          {docRef && (
             <>
               <CustomContainer
                 sx={{
@@ -333,7 +324,10 @@ const AccountSetupPage = () => {
                       color="primary"
                       variant="contained"
                       type="submit"
-                      sx={{padding:0, ":hover": {backgroundColor: "transparent"}}}
+                      sx={{
+                        padding: 0,
+                        ":hover": { backgroundColor: "transparent" },
+                      }}
                       disabled={isSubmitting}
                     >
                       <CustomContainer
@@ -345,8 +339,7 @@ const AccountSetupPage = () => {
                         }}
                       >
                         <Typography variant="h6">
-                        Return {isSubmitting && <CircularProgress />}
-
+                          Return {isSubmitting && <CircularProgress />}
                         </Typography>
                       </CustomContainer>
                     </Button>
@@ -354,7 +347,10 @@ const AccountSetupPage = () => {
                       color="primary"
                       variant="contained"
                       type="submit"
-                      sx={{padding:0, ":hover": {backgroundColor: "transparent"}}}
+                      sx={{
+                        padding: 0,
+                        ":hover": { backgroundColor: "transparent" },
+                      }}
                       disabled={isSubmitting}
                     >
                       <CustomContainer
@@ -366,8 +362,7 @@ const AccountSetupPage = () => {
                         }}
                       >
                         <Typography variant="h6">
-                        Save {isSubmitting && <CircularProgress />}
-
+                          Save {isSubmitting && <CircularProgress />}
                         </Typography>
                       </CustomContainer>
                     </Button>
