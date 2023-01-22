@@ -20,7 +20,6 @@ export const auth = getAuth(app)
 export const firestore = getFirestore(app)
 
 // Attach emulator in the event it has been enabled
-console.log([import.meta.env.DEV, import.meta.env.VITE_FIREBASE_EMULATOR_ENABLED])
 if(
   import.meta.env.DEV &&
   import.meta.env.VITE_FIREBASE_EMULATOR_ENABLED === 'true'
