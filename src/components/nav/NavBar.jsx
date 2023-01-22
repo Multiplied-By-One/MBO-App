@@ -192,8 +192,8 @@ const NavBar = ({ title, content }, props) => {
 
   return (
     <>
-      <Box sx={{ display: "flex" }}>
-        <Box sx={{ display: { xs: "none", sm: "block" } }}>
+      <Box sx={{ display: "flex", padding: 0}}>
+        <Box sx={{ display: { xs: "none", sm: "block" }, width: 0 }}>
           <CssBaseline />
           <AppBar position="fixed" open={open}>
             <Toolbar sx={theme.typography.title}>

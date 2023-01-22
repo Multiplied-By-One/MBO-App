@@ -5,10 +5,14 @@ import PropTypes from "prop-types";
 
 import { styled } from "@mui/material/styles";
 
-const StyledContainer = styled(Container)({
+const StyledContainer = styled(Container)(({ theme }) => ({
   paddingTop: "30px",
   backgroundColor: "inherit",
-});
+  // Push right for drawer
+  [theme.breakpoints.up('sm')]: {
+    paddingLeft: "60px",
+  }
+}));
 
 const Page = ({ title, children }) => {
   return (
