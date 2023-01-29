@@ -104,8 +104,6 @@ const AccountSetupPage = () => {
     onSubmit: async (values) => {
       setIsSubmitting(true);
       try {
-        await sleep(500);
-        alert(JSON.stringify(values, null, 2));
         await updateDoc(docRef,{ userPreferences: values });
         navigate("/");
       } catch (e) {
@@ -338,7 +336,7 @@ const AccountSetupPage = () => {
                         }}
                       >
                         <Typography variant="h6">
-                          Return {isSubmitting && <CircularProgress />}
+                          {isSubmitting ? <CircularProgress color="white" />: "Return"}
                         </Typography>
                       </CustomContainer>
                     </Button>
@@ -361,7 +359,7 @@ const AccountSetupPage = () => {
                         }}
                       >
                         <Typography variant="h6">
-                          Save {isSubmitting && <CircularProgress />}
+                          {isSubmitting ? <CircularProgress color="white" />: "Save"}
                         </Typography>
                       </CustomContainer>
                     </Button>
