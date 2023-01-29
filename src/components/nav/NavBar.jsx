@@ -79,7 +79,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open, showsidebar }) => ({
+})(({ theme, open }) => ({
   transition: theme.transitions.create(["width", "margin"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -93,7 +93,7 @@ const AppBar = styled(MuiAppBar, {
     }),
   }),
   ...(!open && {
-    width: showsidebar !== "true" ? "100%" : `calc(100% - ${4.3}rem)`,
+     width: `calc(100% - ${4.3}rem)`,
   }),
 
   backgroundColor: theme.palette.primary.main,
@@ -120,7 +120,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-const NavBar = ({ title, content, showSideBar = false }, props) => {
+const NavBar = ({ title, content, showSideBar = true }, props) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
@@ -191,14 +191,11 @@ const NavBar = ({ title, content, showSideBar = false }, props) => {
   );
 
   return (
+    <>
       <Box sx={{ display: "flex" }}>
         <Box sx={{ display: { xs: "none", sm: "block" } }}>
           <CssBaseline />
-          <AppBar
-            position="fixed"
-            open={open}
-            showsidebar={showSideBar.toString()}
-          >
+          <AppBar position="fixed" open={open} sx={{width : !showSideBar ? "100%": null}}>
             <Toolbar sx={theme.typography.title}>
               {title ?? (
                 <Typography variant="title">
@@ -212,7 +209,7 @@ const NavBar = ({ title, content, showSideBar = false }, props) => {
               component="nav"
               sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
               aria-label="sidebar navigation"
-              >
+            >
               <Drawer
                 variant="permanent"
                 open={open}
@@ -234,37 +231,34 @@ const NavBar = ({ title, content, showSideBar = false }, props) => {
                     color="inherit"
                     aria-label="open drawer"
                     onClick={!open ? handleDrawerOpen : handleDrawerClose}
+                    edge="start"
                   >
                     {open ? <CloseIcon /> : <MenuIcon />}
                   </IconButton>
                 </DrawerHeader>
                 <Divider
-                  style={{ backgroundColor: theme.palette.primary.background }} />
+                  style={{ backgroundColor: theme.palette.primary.background }}
+                />
 
                 {open && drawerContent}
               </Drawer>
-
-          </Box>
-            
-         )}
+            </Box>
+          )}
         </Box>
-         <Box sx={{ display: { xs: "block", sm: "none" } }}>
-                <MobileSideBar title={title} drawer={drawerContent} showSideBar ={showSideBar}/>
-          </Box>
+        <Box sx={{ display: { xs: "block", sm: "none" } }}>
+          <MobileSideBar title={title} drawer={drawerContent} />
+        </Box>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
           {content}
         </Box>
       </Box>
-      
-   
+    </>
   );
 };
 
 NavBar.propTypes = {
   title: PropTypes.node,
-  content: PropTypes.node,
-  showSideBar: PropTypes.bool,
 };
 
 export default NavBar;

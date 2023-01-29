@@ -102,13 +102,12 @@ const AccountSetupPage = () => {
     },
     validationSchema: accountSetupSchema,
     onSubmit: async (values) => {
-      //TODO: Uncomment and delete next line after test
       setIsSubmitting(true);
       try {
         await sleep(500);
         alert(JSON.stringify(values, null, 2));
         await updateDoc(docRef,{ userPreferences: values });
-        //navigate("/eyeAccount");
+        navigate("/");
       } catch (e) {
         console.error(e);
       } finally {
@@ -140,7 +139,7 @@ const AccountSetupPage = () => {
 
   return (
     <>
-      <Page>
+      <Page showSideBar={false}>
         <StyledContainer>
           {loading && <CircularProgress />}
           {docRef && (
@@ -155,8 +154,8 @@ const AccountSetupPage = () => {
                   transform: "translateX(-50%)",
                 }}
               >
-                <Box sx={{ textAlign: "center" }}>
-                  <Typography variant="title">Set Up Your Account </Typography>
+                <Box sx={{ textAlign: "center", paddingTop: 3 }}>
+                  <Typography sx={{fontSize:"2.5rem"}} variant="title">Set Up Your Account </Typography>
                 </Box>
                 <form
                   onSubmit={formik.handleSubmit}
@@ -323,7 +322,7 @@ const AccountSetupPage = () => {
                     <Button
                       color="primary"
                       variant="contained"
-                      type="submit"
+                      type="reset"
                       sx={{
                         padding: 0,
                         ":hover": { backgroundColor: "transparent" },

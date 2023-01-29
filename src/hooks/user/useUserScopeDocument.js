@@ -7,8 +7,7 @@ const FirestoreDocumentData = () => {
   const [user, userLoading, userError] = useAuthedUser();
   const docRef = user !== undefined ? doc(firestore, "users", user.uid) : undefined;
   const [value, loading, error] = useDocument(docRef);
-  //TODO: remove this AFTER TESTING
-  console.log("data", value?.data())
+  
 
   return [docRef, value, loading || userLoading, error || userError];
 };

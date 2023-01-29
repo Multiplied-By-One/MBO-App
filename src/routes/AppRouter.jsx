@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import AccountSetupPage from "../pages/accountSetup/AccountSetupPage";
 import EyeAccountCreationPage from "../pages/eyeAccount/EyeAccountCreationPage";
 import SystemMapListingPage from "../pages/systemMap/SystemMapListingPage";
+import HubPage from "../pages/HubPage";
 // routes
 const routes = [
   {
@@ -12,7 +13,7 @@ const routes = [
   {
     path: "/",
     exact: true,
-    element: () => "Hub page TBC",
+    element: () => <HubPage/>,
   },
   {
     path: "/dashboard",
