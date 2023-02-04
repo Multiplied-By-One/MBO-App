@@ -27,13 +27,13 @@ const accountSetupSchema = yup.object({
     .number()
     .required("Please select a heading point size")
     .min(10, "Please select a heading point size from 10 to 30")
-    .max(25, "Please select a heading point size from 10 to 30"),
+    .max(30, "Please select a heading point size from 10 to 30"),
   mainTextFont: yup.string().required("Please select a main text font"),
   mainTextPointSize: yup
     .number()
     .required("Please select a main text point size")
     .min(10, "Please select a main text point size from 10 to 30")
-    .max(25, "Please select a main text point size from 10 to 30"),
+    .max(30, "Please select a main text point size from 10 to 30"),
   systemName: yup.string().required("Please enter a system name"),
 });
 
@@ -73,7 +73,6 @@ const StyledContainer = styled(Box)(({ theme }) => ({
   left: "50%",
   transform: "translateX(-50%)",
 
-  //zIndex : -1,
 }));
 const StyledImg = styled("img")(() => ({
   position: "absolute",
