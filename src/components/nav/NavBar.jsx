@@ -93,7 +93,7 @@ const AppBar = styled(MuiAppBar, {
     }),
   }),
   ...(!open && {
-    width: `calc(100% - ${4.3}rem)`,
+     width: `calc(100% - ${4.3}rem)`,
   }),
 
   backgroundColor: theme.palette.primary.main,
@@ -120,7 +120,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-const NavBar = ({ title, content }, props) => {
+const NavBar = ({ title, content, showSideBar = true }, props) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
@@ -192,10 +192,10 @@ const NavBar = ({ title, content }, props) => {
 
   return (
     <>
-      <Box sx={{ display: "flex", padding: 0}}>
-        <Box sx={{ display: { xs: "none", sm: "block" }, width: 0 }}>
+      <Box sx={{ display: "flex" }}>
+        <Box sx={{ display: { xs: "none", sm: "block" } }}>
           <CssBaseline />
-          <AppBar position="fixed" open={open}>
+          <AppBar position="fixed" open={open} sx={{width : !showSideBar ? "100%": null}}>
             <Toolbar sx={theme.typography.title}>
               {title ?? (
                 <Typography variant="title">
@@ -204,44 +204,46 @@ const NavBar = ({ title, content }, props) => {
               )}
             </Toolbar>
           </AppBar>
-          <Box
-            component="nav"
-            sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-            aria-label="sidebar navigation"
-          >
-            <Drawer
-              variant="permanent"
-              open={open}
-              PaperProps={{
-                sx: {
-                  boxSizing: "border-box",
-                  backgroundColor: theme.palette.primary.main,
-                  borderWidth: 3,
-                  borderStyle: "solid",
-                  borderColor: theme.palette.secondary.main,
-                  boxShadow: `5px 5px 3px -1px ${theme.palette.primary.main}`,
-                  borderRadius: 0,
-                  overflowX: "hidden",
-                },
-              }}
+          {showSideBar && (
+            <Box
+              component="nav"
+              sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+              aria-label="sidebar navigation"
             >
-              <DrawerHeader>
-                <IconButton
-                  color="inherit"
-                  aria-label="open drawer"
-                  onClick={!open ? handleDrawerOpen : handleDrawerClose}
-                  edge="center"
-                >
-                  {open ? <CloseIcon /> : <MenuIcon />}
-                </IconButton>
-              </DrawerHeader>
-              <Divider
-                style={{ backgroundColor: theme.palette.primary.background }}
-              />
+              <Drawer
+                variant="permanent"
+                open={open}
+                PaperProps={{
+                  sx: {
+                    boxSizing: "border-box",
+                    backgroundColor: theme.palette.primary.main,
+                    borderWidth: 3,
+                    borderStyle: "solid",
+                    borderColor: theme.palette.secondary.main,
+                    boxShadow: `5px 5px 3px -1px ${theme.palette.primary.main}`,
+                    borderRadius: 0,
+                    overflowX: "hidden",
+                  },
+                }}
+              >
+                <DrawerHeader>
+                  <IconButton
+                    color="inherit"
+                    aria-label="open drawer"
+                    onClick={!open ? handleDrawerOpen : handleDrawerClose}
+                    edge="start"
+                  >
+                    {open ? <CloseIcon /> : <MenuIcon />}
+                  </IconButton>
+                </DrawerHeader>
+                <Divider
+                  style={{ backgroundColor: theme.palette.primary.background }}
+                />
 
-              {open && drawerContent}
-            </Drawer>
-          </Box>
+                {open && drawerContent}
+              </Drawer>
+            </Box>
+          )}
         </Box>
         <Box sx={{ display: { xs: "block", sm: "none" } }}>
           <MobileSideBar title={title} drawer={drawerContent} />

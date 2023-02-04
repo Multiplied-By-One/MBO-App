@@ -14,12 +14,13 @@ const StyledContainer = styled(Container)(({ theme }) => ({
   }
 }));
 
-const Page = ({ title, children }) => {
+const Page = ({ title, children, showSideBar }) => {
   return (
     <Layout>
       <NavBar
         title={title}
-        content={<StyledContainer maxWidth="lg">{children}</StyledContainer>}
+        showSideBar = {showSideBar}
+        content={<StyledContainer maxWidth="false" >{children}</StyledContainer>}
       />
     </Layout>
   );

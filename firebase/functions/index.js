@@ -13,7 +13,7 @@ module.exports.onUserCreate = functions.auth.user().onCreate((user) => {
   db.doc(`users/${user.uid}`).set({
     id: user.uid,
     displayName: user.displayName,
-    userPerferences: {}
+    userPreferences: {}
   });
 });
 
