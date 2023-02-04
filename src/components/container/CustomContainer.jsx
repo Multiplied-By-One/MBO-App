@@ -28,7 +28,6 @@ const CustomContainer = ({children, sx}) => {
 CustomContainer.propTypes = {
     children: PropTypes.node,
     sx: PropTypes.object
-    
 }
 
 export default CustomContainer;

@@ -4,7 +4,6 @@ import { Button } from "@mui/material";
 import PropTypes from "prop-types";
 
 const StyledButton = styled(Button)(({ theme }) => ({
-
     backgroundColor: theme.palette.primary.main,
     borderWidth: 3,
     borderStyle: 'solid',
@@ -17,9 +16,6 @@ const StyledButton = styled(Button)(({ theme }) => ({
     fontFamily: theme.typography.body1.fontFamily,
     fontSize: "1.2rem",
     lineHeight: 1.5,
-
-    
-    
 }));
 
 const CustomButton = ({ children, onClick, startIcon,endIcon,sx, disabled=false }) => {

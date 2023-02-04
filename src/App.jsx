@@ -16,7 +16,6 @@ import AppRouter from './routes/AppRouter';
 function App() {
   const [user, loading, error] = useAuthedUser()
   const router = !user ? <AuthRouter/>: <AppRouter/>
- //const router = <AuthRouter/>
   return (
     <BrowserRouter>
       <Layout>
