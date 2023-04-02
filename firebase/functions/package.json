@@ -14,8 +14,7 @@
   "main": "index.js",
   "dependencies": {
     "firebase-admin": "^10.0.2",
-    "firebase-functions": "^3.18.0",
-    "uuidv4": "^6.2.13"
+    "firebase-functions": "^3.18.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.57.0",
