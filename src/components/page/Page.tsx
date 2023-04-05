@@ -2,10 +2,13 @@ import { Container } from "@mui/material";
 import Layout from "../layout/Layout";
 import NavBar from "../nav/NavBar";
 import PropTypes from "prop-types";
+import React from 'react'
 
-import { styled } from "@mui/material/styles";
+import { Theme, styled } from "@mui/material/styles";
 
-const StyledContainer = styled(Container)(({ theme }) => ({
+const StyledContainer = styled(Container)(({ theme }: {
+  theme: Theme
+}) => ({
   paddingTop: "30px",
   backgroundColor: "inherit",
   // Push right for drawer
@@ -14,7 +17,10 @@ const StyledContainer = styled(Container)(({ theme }) => ({
   }
 }));
 
-const Page = ({ title, children }) => {
+const Page = ({ title, children }: {
+  title: string,
+  children: any
+}) => {
   return (
     <Layout>
       <NavBar
@@ -23,10 +29,6 @@ const Page = ({ title, children }) => {
       />
     </Layout>
   );
-};
-
-Page.propTypes = {
-  title: PropTypes.node,
 };
 
 export default Page;

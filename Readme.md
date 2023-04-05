@@ -87,8 +87,8 @@ Testing Guidelines: TBC
     ├── routes
     │   ├── AppRouter.js
     │   └── AuthRouter.js
-    ├── service-worker.js             # PWA Required Service worker definition
-    ├── serviceWorkerRegistration.js  # Code related to registering the service worker
+    ├── service-worker.ts             # PWA Required Service worker definition
+    ├── serviceWorkerRegistration.ts  # Code related to registering the service worker
     ├── setupTests.js                 # Test JS Entrypoint 
     ├── styles
     │   └── fonts

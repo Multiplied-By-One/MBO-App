@@ -1,4 +1,5 @@
 import { useState, Fragment } from "react";
+import React from 'react'
 import {
   Toolbar,
   Box,
@@ -11,13 +12,13 @@ import {
 } from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
-import { styled, useTheme } from "@mui/material/styles";
+import { Theme, styled, useTheme } from "@mui/material/styles";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 import MobileSideBar from "./MobileSideBar";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import { FixMeLater } from "../../types/FixMeLater";
 
 const drawerWidth = 190;
 
@@ -43,18 +44,33 @@ const navList = [
 ];
 
 //
-const openedMixin = (theme) => ({
+type OpenMixinType = {
+  width: number,
+  transition: string,
+  overflowX: string,
+  overflowY: string,
+  justifyContent: string
+}
+
+type ClosedMixinType = {
+  transition: string,
+  overflowX: string,
+  width: string,
+  alignItems: string
+}
+
+const openedMixin = (theme: Theme): OpenMixinType => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.sharp,
+    duration: theme.transitions.duration.enteringScreen,
   }),
   overflowX: "hidden",
   overflowY: "hidden",
   justifyContent: "flex-start",
 });
 
-const closedMixin = (theme) => ({
+const closedMixin = (theme: Theme): ClosedMixinType => ({
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -67,7 +83,15 @@ const closedMixin = (theme) => ({
   alignItems: "center",
 });
 
-const DrawerHeader = styled("div")(({ theme }) => ({
+const DrawerHeader = styled("div")<TemplateStringsArray>(({ theme }: {
+  theme: Theme
+}): {
+  display: string,
+  alignItems: string,
+  justifyContent: string,
+  padding: string | number,
+  height: string | number
+} => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "flex-end",
@@ -78,8 +102,11 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
+  shouldForwardProp: (prop: string) => prop !== "open",
+})<TemplateStringsArray>(({ theme, open }: {
+  theme: Theme,
+  open?: boolean
+}) => ({
   transition: theme.transitions.create(["width", "margin"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -105,8 +132,11 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
+  shouldForwardProp: (prop: string) => prop !== "open",
+})(({ theme, open }: {
+  theme: Theme,
+  open?: boolean
+}): FixMeLater => ({
   width: drawerWidth,
   flexShrink: 0,
 
@@ -120,22 +150,25 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-const NavBar = ({ title, content }, props) => {
-  const theme = useTheme();
-  const [open, setOpen] = useState(false);
+const NavBar = ({ title, content }: {
+  title: string,
+  content: FixMeLater
+}, props: FixMeLater): FixMeLater => {
+  const theme = useTheme<Theme>();
+  const [open, setOpen] = useState<boolean>(false);
 
-  const handleDrawerOpen = () => {
+  const handleDrawerOpen = (): void => {
     setOpen(true);
   };
 
-  const handleDrawerClose = () => {
+  const handleDrawerClose = (): void => {
     setOpen(false);
   };
   const drawerContent = (
     <div>
       <List>
         <>
-          {navList.map((route, index) => (
+          {navList.map((route: FixMeLater, index: FixMeLater): FixMeLater => (
             <Fragment key={index}>
               <ListItem
                 button
@@ -155,6 +188,7 @@ const NavBar = ({ title, content }, props) => {
                 <>
                   <Divider
                     sx={{
+                      //@todo
                       backgroundColor: theme.palette.primary.background,
                     }}
                   />
@@ -168,6 +202,7 @@ const NavBar = ({ title, content }, props) => {
               )}
               <Divider
                 style={{
+                  //@todo
                   backgroundColor: theme.palette.primary.background,
                 }}
               />
@@ -176,6 +211,7 @@ const NavBar = ({ title, content }, props) => {
           <ListItem sx={{ justifyContent: "center" }}>
             <Divider
               sx={{
+                //@todo
                 backgroundColor: theme.palette.primary.background,
               }}
             />
@@ -195,9 +231,11 @@ const NavBar = ({ title, content }, props) => {
       <Box sx={{ display: "flex", padding: 0}}>
         <Box sx={{ display: { xs: "none", sm: "block" }, width: 0 }}>
           <CssBaseline />
+          //@todo
           <AppBar position="fixed" open={open}>
             <Toolbar sx={theme.typography.title}>
               {title ?? (
+                //@todo
                 <Typography variant="title">
                   Multiplied By <Typography variant="caption">One</Typography>
                 </Typography>
@@ -225,6 +263,7 @@ const NavBar = ({ title, content }, props) => {
                 },
               }}
             >
+              //@todo
               <DrawerHeader>
                 <IconButton
                   color="inherit"
@@ -236,6 +275,7 @@ const NavBar = ({ title, content }, props) => {
                 </IconButton>
               </DrawerHeader>
               <Divider
+                //@todo
                 style={{ backgroundColor: theme.palette.primary.background }}
               />
 
@@ -247,16 +287,13 @@ const NavBar = ({ title, content }, props) => {
           <MobileSideBar title={title} drawer={drawerContent} />
         </Box>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          //@todo
           <DrawerHeader />
           {content}
         </Box>
       </Box>
     </>
   );
-};
-
-NavBar.propTypes = {
-  title: PropTypes.node,
 };
 
 export default NavBar;

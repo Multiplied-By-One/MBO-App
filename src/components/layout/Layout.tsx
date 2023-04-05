@@ -2,18 +2,22 @@ import { Container } from "@mui/material";
 import { StyledEngineProvider, ThemeProvider } from "@mui/material/styles";
 import darkTheme from "../../theme/darkTheme";
 import { GlobalStyles } from "@mui/material";
+import React from 'react'
 
 const backgroundStyle = (
   <GlobalStyles
     styles={{
       body: {
-        backgroundColor: darkTheme.palette.secondary.background,
+        backgroundColor: darkTheme.palette.background.paper
       },
     }}
   />
 );
 
-const Layout = ({ children }) => {
+//@todo
+const Layout = ({ children }: {
+  children: any
+}) => {
   return (
     <StyledEngineProvider injectFirst>
       {/* @todo -- Refactor this to pull the theme from a configurable source! */}

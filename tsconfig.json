@@ -2,10 +2,12 @@
     "compilerOptions": {
         "target": "ESNext",
         "module": "ESNext",
+        "jsx": "react",
         "strict": true,
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
-        "types": ["vite/client"]
+        "types": ["vite/client"],
+        "moduleResolution": "node"
     },
     "include": ["./src/**/*"],
     "exclude": ["node_modules"]
