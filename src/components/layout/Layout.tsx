@@ -2,9 +2,10 @@ import { Container } from "@mui/material";
 import { StyledEngineProvider, ThemeProvider } from "@mui/material/styles";
 import darkTheme from "../../theme/darkTheme";
 import { GlobalStyles } from "@mui/material";
-import React from 'react'
+import React, { ReactElement } from 'react'
+import { FixMeLater } from "../../types/FixMeLater";
 
-const backgroundStyle = (
+const backgroundStyle: ReactElement<any, any> = (
   <GlobalStyles
     styles={{
       body: {
@@ -16,8 +17,8 @@ const backgroundStyle = (
 
 //@todo
 const Layout = ({ children }: {
-  children: any
-}) => {
+  children: FixMeLater
+}): JSX.Element => {
   return (
     <StyledEngineProvider injectFirst>
       {/* @todo -- Refactor this to pull the theme from a configurable source! */}

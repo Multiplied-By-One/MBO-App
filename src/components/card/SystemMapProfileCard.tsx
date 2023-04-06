@@ -1,8 +1,14 @@
 import { Card, Typography } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { Theme, styled } from "@mui/material/styles";
 import PropTypes from "prop-types";
+import { FixMeLater } from "../../types/FixMeLater";
+import { ReactElement } from "react";
+import React from 'react'
 
-const StyledCard = styled(Card)(({ theme }) => ({
+const StyledCard = styled(Card)<TemplateStringsArray>(({ theme }: {
+  theme: Theme
+}): FixMeLater => ({
+  //@todo
   backgroundColor: theme.palette.primary.background,
   border: `2px solid ${theme.palette.secondary.main}`,
   borderRadius: `12px`,
@@ -13,15 +19,23 @@ const StyledCard = styled(Card)(({ theme }) => ({
   justifyContent: "space-between",
 }));
 
-const StyledProfilePicture = styled(Card)(({ theme }) => ({
+const StyledProfilePicture = styled(Card)<TemplateStringsArray>(({ theme }: {
+  theme: Theme
+}): FixMeLater => ({
   border: `2px solid ${theme.palette.secondary.main}`,
   borderRadius: `12px`,
   width: "5em",
   height: "5em",
 }));
 
-const SystemMapProfileCard = ({ id, headline, gender, age }) => {
+const SystemMapProfileCard = ({ id, headline, gender, age }: {
+  id: number,
+  headline: string,
+  gender: "male" | "female" | "other",
+  age: string
+}): ReactElement<any, any> => {
   return (
+    //@todo
     <StyledCard key={id}>
       <div>
         <Typography as="h1" fontFamily={"Funky Olive"}>
@@ -44,6 +58,8 @@ const SystemMapProfileCard = ({ id, headline, gender, age }) => {
     </StyledCard>
   );
 };
+
+//@todo - what to do with these, maybe keep altogether or replace with TS props?
 SystemMapProfileCard.propTypes = {
   id: PropTypes.number,
   headline: PropTypes.string.isRequired,

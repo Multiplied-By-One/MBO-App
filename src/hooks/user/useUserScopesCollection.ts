@@ -1,20 +1,15 @@
 import { collection } from "firebase/firestore";
 import { firestore } from "../../firebase.config";
 import useAuthedUser from "./useAuthedUser"
+import { FixMeLater } from "../../types/FixMeLater";
 
-/**
- * Automatically scopes a collection to the currently authed user
- * @param {*} collectionPath 
- * @param {*} query 
- * @param {*} options 
- * @returns 
- */
-const useUserScopedCollection = (collectionPath) => {
+const useUserScopedCollection = (collectionPath: FixMeLater) => {
   const [user, userLoading, userError] = useAuthedUser()
   const targetCollection = user !== undefined
-    ? collection(firestore, `users/${user.uid}/${collectionPath}`) :
+    ? collection(firestore, `users/${user!.uid}/${collectionPath}`) :
     null
 
+  //@todo return type
   return [
     targetCollection,
     userLoading,

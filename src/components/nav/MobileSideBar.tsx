@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 import PropTypes from "prop-types";
 import MuiAppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -10,18 +10,26 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { styled, useTheme } from "@mui/material/styles";
+import { Theme, styled, useTheme } from "@mui/material/styles";
+import { FixMeLater } from "../../types/FixMeLater";
 
 const drawerWidth = 190;
 
-const AppBar = styled(MuiAppBar)(({ theme }) => ({
+const AppBar = styled(MuiAppBar)<TemplateStringsArray>(({ theme }: {
+  theme: Theme
+}) => ({
   backgroundColor: theme.palette.primary.main,
   border: `2px solid ${theme.palette.secondary.main}`,
   borderRadius: `0 0 12px 12px`,
+  //@todo
   maxWidth: theme.breakpoints.lg,
 }));
 
-const MobileSideBar = ({ title, drawer }) => {
+//@todo
+const MobileSideBar = ({ title, drawer }: {
+  title: string,
+  drawer: FixMeLater
+}): ReactElement<any, any> => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
 

@@ -1,4 +1,4 @@
-import { useState, Fragment } from "react";
+import { useState, Fragment, ReactElement } from "react";
 import React from 'react'
 import {
   Toolbar,
@@ -164,7 +164,8 @@ const NavBar = ({ title, content }: {
   const handleDrawerClose = (): void => {
     setOpen(false);
   };
-  const drawerContent = (
+  
+  const drawerContent: ReactElement<any, any> = (
     <div>
       <List>
         <>

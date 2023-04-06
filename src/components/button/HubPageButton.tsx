@@ -1,9 +1,10 @@
-import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles'
 import { Link } from 'react-router-dom';
-import { Container, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
+import { ReactElement } from 'react';
+import React from 'react'
 
-const StyledLink = styled(Link)(({ theme }) => ({
+const StyledLink = styled(Link)<TemplateStringsArray>(({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
     border: `2px solid ${theme.palette.secondary.main}`,
     color: theme.palette.text.primary,
@@ -22,15 +23,14 @@ const StyledLink = styled(Link)(({ theme }) => ({
 }))
   
 
-const HubPageButton = ({link, text}) => {
+//@todo
+const HubPageButton = ({link, text}: {
+    link: string, 
+    text: string
+}): ReactElement<any, any> => {
     return <StyledLink to={link}>
         <Typography as="span" fontFamily={"Walter Turncoat"} fontSize={20}>{text}</Typography>
     </StyledLink>
-}
-
-HubPageButton.propTypes = {
-    link: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
 }
 
 export default HubPageButton
