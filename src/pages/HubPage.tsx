@@ -1,6 +1,8 @@
 import { Container, Grid } from "@mui/material";
 import Page from "../components/page/Page";
 import HubPageButton from "../components/button/HubPageButton";
+import { ReactElement } from "react";
+import React from 'react'
 
 // Move routes into buttons variable on the line below
 const buttons = [
@@ -54,8 +56,8 @@ const buttons = [
   },
 ];
 
-
-const HubPage = () => {
+//@todo
+const HubPage = (): ReactElement<any, any> => {
   return (
     <Page>
       <Grid container spacing={4}>

@@ -2,8 +2,16 @@ import { Route, Routes } from "react-router-dom";
 import EyeAccountCreationPage from "../pages/eyeAccount/EyeAccountCreationPage";
 import SystemMapListingPage from "../pages/systemMap/SystemMapListingPage";
 import HubPage from "../pages/HubPage";
-// routes
-const routes = [
+import React, { ReactElement } from 'react'
+
+//@todo maybe move out?
+type Route = {
+  path: string,
+  exact: boolean,
+  element: () => ReactElement<any, any> | string | boolean
+}
+
+const routes: Route[] = [
   {
     path: "*",
     exact: true,
@@ -86,7 +94,7 @@ const routes = [
   },
 ];
 
-const AppRouter = () => {
+const AppRouter = (): ReactElement<any, any> => {
   return (
     <Routes>
       {routes.map((route) => (

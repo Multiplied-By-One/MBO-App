@@ -4,32 +4,35 @@ import * as yup from "yup"
 import { useFormik } from "formik"
 import useUserScopedCollection from "../../hooks/user/useUserScopesCollection"
 import { addDoc } from "firebase/firestore"
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { ReactElement, useState } from "react"
+import { NavigateFunction, useNavigate } from "react-router-dom"
+import { FixMeLater } from "../../types/FixMeLater"
+import React from 'react'
 
+//@todo is there a better way of doing this with typescript now?
 const eyeAccountCreationSchema = yup.object({
   name: yup
-    .string('Name must be a string')
+    .string()
     .max(100, "Name must be less than 100 characters")
     .required("Name is a required field"),
   gender: yup
     .string()
     .oneOf(['male', 'female', 'other']),
   age: yup
-    .number("Age must be a a number")
-    .min(1, "Age must be geater than one")
+    .number()
+    .min(1, "Age must be greater than one")
 })
 
-const getFormikInputProps = (formik, fieldName) => ({
+const getFormikInputProps = (formik: FixMeLater, fieldName: FixMeLater): FixMeLater => ({
   value: formik.values[fieldName],
   onChange: formik.handleChange
 })
 
-const EyeAccountCreationPage = () => {
-  const [collection, loading, error] = useUserScopedCollection('eyeAccounts')
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const navigate = useNavigate()
-  const formik = useFormik({
+const EyeAccountCreationPage = (): ReactElement<any, any> => {
+  const [collection, loading, error]: FixMeLater = useUserScopedCollection('eyeAccounts')
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+  const navigate: NavigateFunction = useNavigate()
+  const formik: FixMeLater = useFormik({
     initialValues: {
       name: '',
       gender: 'other',

@@ -10,10 +10,10 @@ type UserScopedCollectionData = {
   error: Error | undefined,
   snapshot: QuerySnapshot<any> | undefined
 }
-const useUserScopedCollectionData = (collectionPath: FixMeLater, query: FixMeLater, options: FixMeLater): UserScopedCollectionData  => {
+const useUserScopedCollectionData = (collectionPath: FixMeLater, query?: FixMeLater, options?: FixMeLater): UserScopedCollectionData  => {
   const [user, userLoading, userError] = useAuthedUser()
   const collectionQuery = user !== undefined
-    ? collection(firestore, `users/${user.uid}/${collectionPath}`) :
+    ? collection(firestore, `users/${user!.uid}/${collectionPath}`) :
     null
   const [data, collectionLoading, collectionError, snapshot] = useCollectionData(collectionQuery, options)
 
