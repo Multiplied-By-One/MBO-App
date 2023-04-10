@@ -3,9 +3,11 @@ import Page from "../../components/page/Page"
 import * as yup from "yup"
 import { useFormik } from "formik"
 import useUserScopedCollection from "../../hooks/user/useUserScopesCollection"
-import { addDoc } from "firebase/firestore"
+import { addDoc, updateDoc } from "firebase/firestore"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import Dropzone from "../../components/form/dropzone/Dropzone"
+import { useUserScopedUploadFile } from "../../hooks/user/useUserScopedUploadFile"
 
 const eyeAccountCreationSchema = yup.object({
   name: yup
@@ -17,7 +19,8 @@ const eyeAccountCreationSchema = yup.object({
     .oneOf(['male', 'female', 'other']),
   age: yup
     .number("Age must be a a number")
-    .min(1, "Age must be geater than one")
+    .min(1, "Age must be geater than one"),
+  avatar: yup.mixed()
 })
 
 const getFormikInputProps = (formik, fieldName) => ({
@@ -27,19 +30,34 @@ const getFormikInputProps = (formik, fieldName) => ({
 
 const EyeAccountCreationPage = () => {
   const [collection, loading, error] = useUserScopedCollection('eyeAccounts')
+  const { uploadLoading, uploadFile } = useUserScopedUploadFile()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const navigate = useNavigate()
   const formik = useFormik({
     initialValues: {
       name: '',
       gender: 'other',
-      age: ''
+      age: '',
+      avatar: null
     },
     validationSchema: eyeAccountCreationSchema,
     onSubmit: async (values) => {
       setIsSubmitting(true)
       try {
-        await addDoc(collection, values)
+        // Null out avatar so we don't try to save it to the database but set it later
+        const docValues = {
+          ...values,
+          ...{ avatar: null }
+        }
+        const docRef = await addDoc(collection, docValues)
+        
+        if(values.avatar){
+          const avatarRef = await uploadFile(values.avatar, `eyeAccounts/${docRef.id}/avatar`)
+          await updateDoc(docRef, {
+            avatar: avatarRef.ref.fullPath
+          })
+        }
+
         navigate('/system-map')
       } catch (e){
         console.error(e)
@@ -95,6 +113,13 @@ const EyeAccountCreationPage = () => {
         />
         <FormHelperText id="age-text">{formik.touched.age && formik.errors.age}</FormHelperText>
       </FormControl>
+      {uploadLoading ?
+        <CircularProgress /> :
+        <Dropzone 
+          {...getFormikInputProps(formik, 'avatar')}
+          setFieldValue={(file) => formik.setFieldValue('avatar', file)}
+        />
+      }
       <Button color="primary" variant="contained" fullWidth type="submit" disabled={isSubmitting}>
         Submit {isSubmitting && <CircularProgress />}
       </Button>
