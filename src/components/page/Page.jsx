@@ -4,6 +4,7 @@ import NavBar from "../nav/NavBar";
 import PropTypes from "prop-types";
 
 import { styled } from "@mui/material/styles";
+import { Helmet } from "react-helmet";
 
 const StyledContainer = styled(Container)(({ theme }) => ({
   paddingTop: "30px",
@@ -17,6 +18,9 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 const Page = ({ title, children, showSideBar }) => {
   return (
     <Layout>
+      <Helmet>
+        <title>{title}</title>
+      </Helmet>
       <NavBar
         title={title}
         showSideBar = {showSideBar}

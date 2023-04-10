@@ -3,6 +3,9 @@
     "rules": "./firebase/firestore/firestore.rules",
     "indexes": "./firebase/firestore/firestore.indexes.json"
   },
+  "storage": {
+    "rules": "./firebase/storage/storage.rules"
+  },
   "functions": {
     "source": "./firebase/functions"
   },
@@ -15,6 +18,9 @@
     },
     "firestore": {
       "port": 8080
+    },
+    "storage": {
+      "port": 9199
     },
     "ui": {
       "enabled": true

@@ -16,13 +16,15 @@
     "concurrently": "^7.3.0",
     "firebase": "^9.9.2",
     "firebase-admin": "^11.0.1",
-    "firebase-tools": "^11.4.2",
+    "firebase-tools": "^11.25.2",
     "forever": "^4.0.3",
     "formik": "^2.2.9",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-firebase-hooks": "^5.0.3",
+    "react-helmet": "^6.1.0",
     "react-router-dom": "^6.3.0",
     "web-vitals": "^2.1.4",
     "workbox-background-sync": "^6.5.4",
@@ -44,9 +46,10 @@
     "start": "concurrently --names \"react,firebase\" \"npm run start:react\" \"npm run start:firebase \"",
     "start:react": "vite --port=3000",
     "start:firebase": "firebase emulators:start --import ./firebase/emulator_data",
-    "kill:firebase": "kill-port 4000 8080 3000 5001 9099",
+    "kill:firebase": "kill-port 4000 8080 3000 5001 9099 9199",
     "export:firebase": "firebase emulators:export firebase/emulator_data",
-    "build": "vite build"
+    "build": "vite build",
+    "postinstall": "cd firebase/functions && npm install"
   },
   "eslintConfig": {
     "extends": [

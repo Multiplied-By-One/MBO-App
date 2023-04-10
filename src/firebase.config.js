@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, connectAuthEmulator } from "firebase/auth"
 import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
+import { getStorage, connectStorageEmulator } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDu8n17p63quhK72NsQJ0QDh6gWAO_v_SA",
@@ -18,6 +19,7 @@ const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app)
 export const firestore = getFirestore(app)
+export const storage = getStorage(app)
 
 // Attach emulator in the event it has been enabled
 if(
@@ -30,6 +32,10 @@ if(
     import.meta.env.VITE_FIREBASE_FIRESTORE_EMULATOR_HOST,
     Number(import.meta.env.VITE_FIREBASE_FIRESTORE_EMULATOR_PORT)
   )
-
+  connectStorageEmulator(
+    storage, 
+    import.meta.env.VITE_FIREBASE_STORAGE_EMULATOR_HOST,
+    Number(import.meta.env.VITE_FIREBASE_STORAGE_EMULATOR_PORT)
+  )
 }
 
