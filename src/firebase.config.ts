@@ -1,8 +1,18 @@
-import { initializeApp } from "firebase/app";
-import { getAuth, connectAuthEmulator } from "firebase/auth"
-import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
+import { FirebaseApp, initializeApp } from "firebase/app";
+import { getAuth, connectAuthEmulator, Auth } from "firebase/auth"
+import { getFirestore, connectFirestoreEmulator, Firestore } from "firebase/firestore";
 
-const firebaseConfig = {
+type FirebaseConfig {
+  apiKey: string,
+  authDomain: string,
+  databaseURL: string,
+  projectId: string,
+  storageBucket: string,
+  messagingSenderId: string,
+  appId: string,
+}
+//@todo remove the api key from git..
+const firebaseConfig: FirebaseConfig = {
   apiKey: "AIzaSyDu8n17p63quhK72NsQJ0QDh6gWAO_v_SA",
   authDomain: "mbo-app-1df4e.firebaseapp.com",
   databaseURL: "https://mbo-app-1df4e-default-rtdb.firebaseio.com",
@@ -14,10 +24,10 @@ const firebaseConfig = {
 
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const app: FirebaseApp = initializeApp(firebaseConfig);
 
-export const auth = getAuth(app)
-export const firestore = getFirestore(app)
+export const auth: Auth = getAuth(app)
+export const firestore: Firestore = getFirestore(app)
 
 // Attach emulator in the event it has been enabled
 if(

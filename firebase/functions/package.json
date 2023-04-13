@@ -11,7 +11,7 @@
   "engines": {
     "node": "16"
   },
-  "main": "index.js",
+  "main": "index.ts",
   "dependencies": {
     "firebase-admin": "^10.0.2",
     "firebase-functions": "^3.18.0"
@@ -22,5 +22,6 @@
     "firebase-functions-test": "^0.2.0",
     "typescript": "^5.0.3"
   },
+  "type": "module",
   "private": true
 }

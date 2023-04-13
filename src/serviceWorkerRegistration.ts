@@ -1,8 +1,6 @@
 // This optional code is used to register a service worker.
 // register() is not called by default.
 
-import { FixMeLater } from "./types/FixMeLater";
-
 // This lets the app load faster on subsequent visits in production, and gives
 // it offline capabilities. However, it also means that developers (and users)
 // will only see deployed updates on subsequent visits to a page, after all the
@@ -12,6 +10,11 @@ import { FixMeLater } from "./types/FixMeLater";
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://cra.link/PWA
 
+type ConfigType = {
+  onSuccess: Function
+  onUpdate: Function
+}
+
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.
@@ -20,7 +23,7 @@ const isLocalhost = Boolean(
     window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
 );
 
-export function register(config: FixMeLater) {
+export function register(config: ConfigType) {
   if (import.meta.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(import.meta.env.VITE_PUBLIC_URL, window.location.href);
@@ -54,7 +57,7 @@ export function register(config: FixMeLater) {
   }
 }
 
-function registerValidSW(swUrl: FixMeLater, config: FixMeLater) {
+function registerValidSW(swUrl: string, config: ConfigType) {
   navigator.serviceWorker
     .register(swUrl)
     .then((registration) => {
@@ -98,7 +101,7 @@ function registerValidSW(swUrl: FixMeLater, config: FixMeLater) {
     });
 }
 
-function checkValidServiceWorker(swUrl: FixMeLater, config: FixMeLater) {
+function checkValidServiceWorker(swUrl: string, config: ConfigType) {
   // Check if the service worker can be found. If it can't reload the page.
   fetch(swUrl, {
     headers: { 'Service-Worker': 'script' },

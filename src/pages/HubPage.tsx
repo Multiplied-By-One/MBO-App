@@ -62,7 +62,10 @@ const HubPage = (): ReactElement<any, any> => {
     <Page>
       <Grid container spacing={4}>
         {buttons.map((button) => (
-          <Grid item l={4} key={button.link}><HubPageButton key={button.link} link={button.link} text={button.text} /> </Grid>
+          //@todo - xs might not be right?
+          <Grid item xs={4} key={button.link}>
+            <HubPageButton key={button.link} link={button.link} text={button.text} /> 
+          </Grid>
         ))}
       </Grid>
     </Page>

@@ -1,14 +1,11 @@
 import { Card, Typography } from "@mui/material"
 import { Theme, styled } from '@mui/material/styles'
-import { ReactElement } from "react";
-import { FixMeLater } from "../../types/FixMeLater";
+import React, { ReactElement } from "react";
 
-
-const StyledCard = styled(Card)<TemplateStringsArray>(({ theme }: {
+const StyledCard = styled(Card)(({ theme }: {
     theme: Theme
-}): FixMeLater  => ({
-    //@todo
-    backgroundColor: theme.palette.primary.background,
+})  => ({
+    backgroundColor: theme.palette.background.default,
     border: `2px solid ${theme.palette.secondary.main}`,
     borderRadius: `12px`,
 }))
@@ -16,13 +13,12 @@ const StyledCard = styled(Card)<TemplateStringsArray>(({ theme }: {
 
 const EyeAccountCard = ({headline, gender, age}: {
     headline: string,
-    //@todo make this be list of specific strings, male, female, other
-    gender: string,
+    gender: 'male' | 'female' | 'other',
     age: string
 }): ReactElement<any, any> => {
     return (
         <StyledCard>
-            <Typography as="h4" fontFamily={"Walter Turncoat"}>{headline}</Typography>
+            <Typography component="h4" fontFamily={"Walter Turncoat"}>{headline}</Typography>
             <p>Gender: {gender}</p>
             <p>Age: {age}</p>
         </StyledCard>

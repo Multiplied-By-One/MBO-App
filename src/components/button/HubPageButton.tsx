@@ -1,10 +1,12 @@
-import { styled } from '@mui/material/styles'
+import { Theme, styled } from '@mui/material/styles'
 import { Link } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import { ReactElement } from 'react';
 import React from 'react'
 
-const StyledLink = styled(Link)<TemplateStringsArray>(({ theme }) => ({
+const StyledLink = styled(Link)(({ theme }: {
+    theme: Theme
+}) => ({
     backgroundColor: theme.palette.primary.main,
     border: `2px solid ${theme.palette.secondary.main}`,
     color: theme.palette.text.primary,
@@ -29,7 +31,7 @@ const HubPageButton = ({link, text}: {
     text: string
 }): ReactElement<any, any> => {
     return <StyledLink to={link}>
-        <Typography as="span" fontFamily={"Walter Turncoat"} fontSize={20}>{text}</Typography>
+        <Typography fontFamily={"Walter Turncoat"} fontSize={20} component="span">{text}</Typography>
     </StyledLink>
 }
 

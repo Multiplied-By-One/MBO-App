@@ -1,9 +1,7 @@
 import { Container } from "@mui/material";
 import Layout from "../layout/Layout";
 import NavBar from "../nav/NavBar";
-import PropTypes from "prop-types";
-import React from 'react'
-
+import React, { ReactElement } from 'react'
 import { Theme, styled } from "@mui/material/styles";
 
 const StyledContainer = styled(Container)(({ theme }: {
@@ -11,7 +9,6 @@ const StyledContainer = styled(Container)(({ theme }: {
 }) => ({
   paddingTop: "30px",
   backgroundColor: "inherit",
-  // Push right for drawer
   [theme.breakpoints.up('sm')]: {
     paddingLeft: "60px",
   }
@@ -19,6 +16,8 @@ const StyledContainer = styled(Container)(({ theme }: {
 
 const Page = ({ title, children }: {
   title: string,
+  // children: ReactElement<any, any> | ReactElement<any, any>[]
+  //@todo
   children: any
 }) => {
   return (

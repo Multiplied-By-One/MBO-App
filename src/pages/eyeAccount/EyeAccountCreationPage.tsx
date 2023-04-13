@@ -1,15 +1,13 @@
-import { Button, CircularProgress, FormControl, FormHelperText, Input, InputLabel, MenuItem, Select } from "@mui/material"
+import { Button, CircularProgress, FormControl, FormHelperText, Input, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material"
 import Page from "../../components/page/Page"
 import * as yup from "yup"
-import { useFormik } from "formik"
+import { FormikValues, useFormik } from "formik"
 import useUserScopedCollection from "../../hooks/user/useUserScopesCollection"
 import { addDoc } from "firebase/firestore"
 import { ReactElement, useState } from "react"
 import { NavigateFunction, useNavigate } from "react-router-dom"
-import { FixMeLater } from "../../types/FixMeLater"
 import React from 'react'
 
-//@todo is there a better way of doing this with typescript now?
 const eyeAccountCreationSchema = yup.object({
   name: yup
     .string()
@@ -23,16 +21,20 @@ const eyeAccountCreationSchema = yup.object({
     .min(1, "Age must be greater than one")
 })
 
-const getFormikInputProps = (formik: FixMeLater, fieldName: FixMeLater): FixMeLater => ({
+const getFormikInputProps = (formik: FormikValues, fieldName: string): {
+  value: any,
+  //@todo is there a way we can make this expect the two event types?
+  onChange: (event: any) => void
+} => ({
   value: formik.values[fieldName],
   onChange: formik.handleChange
 })
 
 const EyeAccountCreationPage = (): ReactElement<any, any> => {
-  const [collection, loading, error]: FixMeLater = useUserScopedCollection('eyeAccounts')
+  const { targetCollection, userLoading } = useUserScopedCollection('eyeAccounts')
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
   const navigate: NavigateFunction = useNavigate()
-  const formik: FixMeLater = useFormik({
+  const formik: FormikValues = useFormik({
     initialValues: {
       name: '',
       gender: 'other',
@@ -41,9 +43,12 @@ const EyeAccountCreationPage = (): ReactElement<any, any> => {
     validationSchema: eyeAccountCreationSchema,
     onSubmit: async (values) => {
       setIsSubmitting(true)
+
       try {
-        await addDoc(collection, values)
-        navigate('/system-map')
+        if (targetCollection) {
+          await addDoc(targetCollection, values)
+          navigate('/system-map')
+        }
       } catch (e){
         console.error(e)
       } finally {
@@ -52,9 +57,10 @@ const EyeAccountCreationPage = (): ReactElement<any, any> => {
     }
   })
 
+  //@todo - Page.tsx child type
   return <Page title="Create Eye Account">
-    {loading && <CircularProgress />}
-    {collection && <form onSubmit={formik.handleSubmit}>
+    { userLoading && <CircularProgress />}
+    {targetCollection && <form onSubmit={formik.handleSubmit}>
       <FormControl
         fullWidth
         error={formik.touched.name && Boolean(formik.errors.name)}

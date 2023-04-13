@@ -6,13 +6,10 @@ import { auth } from '../../firebase.config'
 function LoginPage() {
   const [
     signInWithGoogle,
-    user,
-    loading,
-    error
   ] = useSignInWithGoogle(auth)
   
   return (
-    <Page>
+    <Page title='Login'>
       <div>LoginPage</div>
       <button onClick={() => signInWithGoogle(
         ['https://www.googleapis.com/auth/contacts.readonly']
