@@ -7,7 +7,6 @@ import { ReactElement } from "react";
 import React from 'react'
 import { DocumentData } from "firebase/firestore";
 
-//@todo
 const SystemMapListingPage = (): ReactElement<any, any> => {
   const {data, loading, error} =
     useUserScopedCollectionData("eyeAccounts");

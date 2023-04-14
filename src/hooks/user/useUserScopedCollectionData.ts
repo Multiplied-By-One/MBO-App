@@ -23,7 +23,6 @@ const useUserScopedCollectionData = (collectionPath: string): UserScopedCollecti
     null
   const [data, collectionLoading, collectionError, snapshot] = useCollectionData(collectionQuery)
 
-  //@todo
   return {
    data: data,
    loading: userLoading || collectionLoading,

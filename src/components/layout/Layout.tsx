@@ -14,7 +14,6 @@ const backgroundStyle: ReactElement<any, any> = (
   />
 );
 
-//@todo is there anything to do here instead?
 const Layout = ({ children }: {
   children: any
 }): ReactElement<any, any> => {

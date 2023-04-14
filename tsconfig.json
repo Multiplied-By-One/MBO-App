@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
-        "target": "ESNext",
-        "module": "ESNext",
+        "target": "es6",
+        "module": "commonjs",
         "jsx": "react",
         "strict": true,
         "esModuleInterop": true,
@@ -9,7 +9,7 @@
         "types": ["vite/client"],
         "moduleResolution": "node"
     },
-    "include": ["./src/**/*"],
+    "include": ["./src/**/*", "./firebase/functions/*"],
     "exclude": ["node_modules"]
 }
   

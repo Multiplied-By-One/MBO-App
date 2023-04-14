@@ -21,11 +21,9 @@ const AppBar = styled(MuiAppBar)(({ theme }: {
   backgroundColor: theme.palette.primary.main,
   border: `2px solid ${theme.palette.secondary.main}`,
   borderRadius: `0 0 12px 12px`,
-  //@todo
   maxWidth: theme.breakpoints.values.lg,
 }));
 
-//@todo
 const MobileSideBar = ({ title, drawer }: {
   title: string,
   drawer: ReactElement<any, any>

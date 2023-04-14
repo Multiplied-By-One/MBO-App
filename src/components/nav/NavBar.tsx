@@ -119,7 +119,6 @@ const AppBar = styled(MuiAppBar, {
   alignItems: "center",
 }));
 
-//@todo
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop: string) => prop !== "open",
 })(({ theme, open }: {
@@ -178,7 +177,6 @@ const NavBar = ({ title, content }: {
                 <>
                   <Divider
                     sx={{
-                      //@todo
                       backgroundColor: theme.palette.background.default,
                     }}
                   />
@@ -192,7 +190,6 @@ const NavBar = ({ title, content }: {
               )}
               <Divider
                 style={{
-                  //@todo
                   backgroundColor: theme.palette.background.default,
                 }}
               />
@@ -201,7 +198,6 @@ const NavBar = ({ title, content }: {
           <ListItem sx={{ justifyContent: "center" }}>
             <Divider
               sx={{
-                //@todo
                 backgroundColor: theme.palette.background.default,
               }}
             />
@@ -221,11 +217,9 @@ const NavBar = ({ title, content }: {
       <Box sx={{ display: "flex", padding: 0}}>
         <Box sx={{ display: { xs: "none", sm: "block" }, width: 0 }}>
           <CssBaseline />
-          //@todo
           <AppBar theme={theme} position="fixed" open={open}>
             <Toolbar sx={theme.typography.h1}>
               {title ?? (
-                //@todo
                 <Typography component="title">
                   Multiplied By <Typography variant="caption">One</Typography>
                 </Typography>
@@ -253,7 +247,6 @@ const NavBar = ({ title, content }: {
                 },
               }}
             >
-              //@todo
               <DrawerHeader>
                 <IconButton
                   color="inherit"
@@ -276,7 +269,6 @@ const NavBar = ({ title, content }: {
           <MobileSideBar title={title} drawer={drawerContent} />
         </Box>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          //@todo
           <DrawerHeader />
           {content}
         </Box>

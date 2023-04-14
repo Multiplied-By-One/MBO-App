@@ -23,7 +23,6 @@ const eyeAccountCreationSchema = yup.object({
 
 const getFormikInputProps = (formik: FormikValues, fieldName: string): {
   value: any,
-  //@todo is there a way we can make this expect the two event types?
   onChange: (event: any) => void
 } => ({
   value: formik.values[fieldName],
@@ -57,7 +56,6 @@ const EyeAccountCreationPage = (): ReactElement<any, any> => {
     }
   })
 
-  //@todo - Page.tsx child type
   return <Page title="Create Eye Account">
     { userLoading && <CircularProgress />}
     {targetCollection && <form onSubmit={formik.handleSubmit}>

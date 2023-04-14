@@ -4,7 +4,6 @@ import SystemMapListingPage from "../pages/systemMap/SystemMapListingPage";
 import HubPage from "../pages/HubPage";
 import React, { ReactElement } from 'react'
 
-//@todo maybe move out?
 type Route = {
   path: string,
   exact: boolean,

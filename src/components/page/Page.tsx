@@ -16,8 +16,6 @@ const StyledContainer = styled(Container)(({ theme }: {
 
 const Page = ({ title, children }: {
   title: string,
-  // children: ReactElement<any, any> | ReactElement<any, any>[]
-  //@todo
   children: any
 }) => {
   return (

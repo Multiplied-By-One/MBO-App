@@ -24,8 +24,6 @@ const StyledLink = styled(Link)(({ theme }: {
     }
 }))
   
-
-//@todo
 const HubPageButton = ({link, text}: {
     link: string, 
     text: string
