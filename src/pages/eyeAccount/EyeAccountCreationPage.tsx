@@ -1,35 +1,39 @@
-import { Button, CircularProgress, FormControl, FormHelperText, Input, InputLabel, MenuItem, Select } from "@mui/material"
+import { Button, CircularProgress, FormControl, FormHelperText, Input, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material"
 import Page from "../../components/page/Page"
 import * as yup from "yup"
-import { useFormik } from "formik"
+import { FormikValues, useFormik } from "formik"
 import useUserScopedCollection from "../../hooks/user/useUserScopesCollection"
 import { addDoc } from "firebase/firestore"
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { ReactElement, useState } from "react"
+import { NavigateFunction, useNavigate } from "react-router-dom"
+import React from 'react'
 
 const eyeAccountCreationSchema = yup.object({
   name: yup
-    .string('Name must be a string')
+    .string()
     .max(100, "Name must be less than 100 characters")
     .required("Name is a required field"),
   gender: yup
     .string()
     .oneOf(['male', 'female', 'other']),
   age: yup
-    .number("Age must be a a number")
-    .min(1, "Age must be geater than one")
+    .number()
+    .min(1, "Age must be greater than one")
 })
 
-const getFormikInputProps = (formik, fieldName) => ({
+const getFormikInputProps = (formik: FormikValues, fieldName: string): {
+  value: any,
+  onChange: (event: any) => void
+} => ({
   value: formik.values[fieldName],
   onChange: formik.handleChange
 })
 
-const EyeAccountCreationPage = () => {
-  const [collection, loading, error] = useUserScopedCollection('eyeAccounts')
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const navigate = useNavigate()
-  const formik = useFormik({
+const EyeAccountCreationPage = (): ReactElement<any, any> => {
+  const { targetCollection, userLoading } = useUserScopedCollection('eyeAccounts')
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+  const navigate: NavigateFunction = useNavigate()
+  const formik: FormikValues = useFormik({
     initialValues: {
       name: '',
       gender: 'other',
@@ -38,9 +42,12 @@ const EyeAccountCreationPage = () => {
     validationSchema: eyeAccountCreationSchema,
     onSubmit: async (values) => {
       setIsSubmitting(true)
+
       try {
-        await addDoc(collection, values)
-        navigate('/system-map')
+        if (targetCollection) {
+          await addDoc(targetCollection, values)
+          navigate('/system-map')
+        }
       } catch (e){
         console.error(e)
       } finally {
@@ -50,8 +57,8 @@ const EyeAccountCreationPage = () => {
   })
 
   return <Page title="Create Eye Account">
-    {loading && <CircularProgress />}
-    {collection && <form onSubmit={formik.handleSubmit}>
+    { userLoading && <CircularProgress />}
+    {targetCollection && <form onSubmit={formik.handleSubmit}>
       <FormControl
         fullWidth
         error={formik.touched.name && Boolean(formik.errors.name)}

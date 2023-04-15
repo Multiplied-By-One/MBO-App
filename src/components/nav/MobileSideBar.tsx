@@ -1,5 +1,4 @@
-import { useState } from "react";
-import PropTypes from "prop-types";
+import { ReactElement, useState } from "react";
 import MuiAppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -10,22 +9,28 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { styled, useTheme } from "@mui/material/styles";
+import { Theme, styled, useTheme } from "@mui/material/styles";
+import React from 'react'
 
-const drawerWidth = 190;
+const drawerWidth: number = 190;
 
-const AppBar = styled(MuiAppBar)(({ theme }) => ({
+const AppBar = styled(MuiAppBar)(({ theme }: {
+  theme: Theme
+}) => ({
   backgroundColor: theme.palette.primary.main,
   border: `2px solid ${theme.palette.secondary.main}`,
   borderRadius: `0 0 12px 12px`,
-  maxWidth: theme.breakpoints.lg,
+  maxWidth: theme.breakpoints.values.lg,
 }));
 
-const MobileSideBar = ({ title, drawer }) => {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const theme = useTheme();
+const MobileSideBar = ({ title, drawer }: {
+  title: string,
+  drawer: ReactElement<any, any>
+}): ReactElement<any, any> => {
+  const [mobileOpen, setMobileOpen] = useState<boolean>(false);
+  const theme: Theme = useTheme();
 
-  const handleDrawerToggle = () => {
+  const handleDrawerToggle = (): void => {
     setMobileOpen(!mobileOpen);
   };
 
@@ -49,14 +54,14 @@ const MobileSideBar = ({ title, drawer }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Toolbar sx={[theme.typography.title, { fontSize: "1.2rem" }]}>
+          <Toolbar sx={[theme.typography.h1, { fontSize: "1.2rem" }]}>
             {title ?? (
-              <Typography variant="title" sx={{ fontSize: "inherit" }}>
+              <Typography component="title" sx={{ fontSize: "inherit" }}>
                 Multiplied By <Typography variant="caption">One</Typography>
               </Typography>
             )}
           </Toolbar>
-          <Box as="div"></Box>
+          <Box component="div"></Box>
         </Toolbar>
       </AppBar>
       <Box
@@ -106,11 +111,6 @@ const MobileSideBar = ({ title, drawer }) => {
       </Box>
     </Box>
   );
-};
-
-MobileSideBar.propTypes = {
-  title: PropTypes.string,
-  drawer: PropTypes.element,
 };
 
 export default MobileSideBar;

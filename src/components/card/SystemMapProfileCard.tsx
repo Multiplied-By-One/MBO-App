@@ -1,9 +1,12 @@
 import { Card, Typography } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import PropTypes from "prop-types";
+import { Theme, styled } from "@mui/material/styles";
+import { ReactElement } from "react";
+import React from 'react'
 
-const StyledCard = styled(Card)(({ theme }) => ({
-  backgroundColor: theme.palette.primary.background,
+const StyledCard = styled(Card)(({ theme }: {
+  theme: Theme
+}) => ({
+  backgroundColor: theme.palette.background.default,
   border: `2px solid ${theme.palette.secondary.main}`,
   borderRadius: `12px`,
   padding: `1em`,
@@ -13,28 +16,35 @@ const StyledCard = styled(Card)(({ theme }) => ({
   justifyContent: "space-between",
 }));
 
-const StyledProfilePicture = styled(Card)(({ theme }) => ({
+const StyledProfilePicture = styled(Card)(({ theme }: {
+  theme: Theme
+}) => ({
   border: `2px solid ${theme.palette.secondary.main}`,
   borderRadius: `12px`,
   width: "5em",
   height: "5em",
 }));
 
-const SystemMapProfileCard = ({ id, headline, gender, age }) => {
+const SystemMapProfileCard = ({ id, headline, gender, age }: {
+  id: number,
+  headline: string,
+  gender: "male" | "female" | "other",
+  age: string
+}): ReactElement<any, any> => {
   return (
     <StyledCard key={id}>
       <div>
-        <Typography as="h1" fontFamily={"Funky Olive"}>
+        <Typography component="h1" fontFamily={"Funky Olive"}>
           {headline}
         </Typography>
         <Typography
-          as="h1"
+          component="h1"
           fontFamily={"Francois One"}
           sx={{ textTransform: "capitalize" }}
         >
           {gender}
         </Typography>
-        <Typography as="h1" fontFamily={"Francois One"}>
+        <Typography component="h1" fontFamily={"Francois One"}>
           Age {age}
         </Typography>
       </div>
@@ -44,10 +54,5 @@ const SystemMapProfileCard = ({ id, headline, gender, age }) => {
     </StyledCard>
   );
 };
-SystemMapProfileCard.propTypes = {
-  id: PropTypes.number,
-  headline: PropTypes.string.isRequired,
-  gender: PropTypes.oneOf(["male", "female", "other"]), // @todo Confirm either a list of genders here or if this should be free form
-  age: PropTypes.string,
-};
+
 export default SystemMapProfileCard;

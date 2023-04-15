@@ -6,19 +6,21 @@ export default createTheme(baseTheme, {
   palette: {
     text: {
       primary: "#FFFFFF",
-      secondery: "#FFFFFF",
+      secondary: "#FFFFFF",
     },
     primary: {
       main: "#222222",
-      background: "#333333",
     },
     secondary: {
       main: "#5f1c17",
-      background: "#242220",
     },
     inputBorderColor: {
       color: "#FFFFFF",
       disabledColor: "#757575",
     },
+    background: {
+      default: '#333333', //primary
+      paper: '#242220' //secondary
+    }
   },
 });

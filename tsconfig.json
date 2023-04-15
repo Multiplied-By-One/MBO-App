@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "jsx": "react",
+        "strict": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "types": ["vite/client"],
+        "moduleResolution": "node"
+    },
+    "include": ["./src/**/*", "./firebase/functions/*"],
+    "exclude": ["node_modules"]
+}
+  

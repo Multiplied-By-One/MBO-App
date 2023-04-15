@@ -1,4 +1,5 @@
-import { useState, Fragment } from "react";
+import { useState, Fragment, ReactElement } from "react";
+import React from 'react'
 import {
   Toolbar,
   Box,
@@ -11,9 +12,8 @@ import {
 } from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
-import { styled, useTheme } from "@mui/material/styles";
+import { Theme, styled, useTheme } from "@mui/material/styles";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 import MobileSideBar from "./MobileSideBar";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -22,7 +22,12 @@ import CloseIcon from "@mui/icons-material/Close";
 const drawerWidth = 190;
 
 // navList
-const navList = [
+type NavRoute = {
+  name: string,
+  path: string
+}
+
+const navList: NavRoute[] = [
   {
     name: "Dashboard",
     path: "/dashboard",
@@ -42,19 +47,18 @@ const navList = [
   { name: "Sign Out", path: "/sign-out" },
 ];
 
-//
-const openedMixin = (theme) => ({
+const openedMixin = (theme: Theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.sharp,
+    duration: theme.transitions.duration.enteringScreen,
   }),
   overflowX: "hidden",
   overflowY: "hidden",
   justifyContent: "flex-start",
 });
 
-const closedMixin = (theme) => ({
+const closedMixin = (theme: Theme) => ({
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -67,7 +71,15 @@ const closedMixin = (theme) => ({
   alignItems: "center",
 });
 
-const DrawerHeader = styled("div")(({ theme }) => ({
+const DrawerHeader = styled("div")(({ theme }: {
+  theme: Theme
+}): {
+  display: string,
+  alignItems: string,
+  justifyContent: string,
+  padding: string | number,
+  height: string | number
+} => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "flex-end",
@@ -78,8 +90,11 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
+  shouldForwardProp: (open: string) => open !== "open",
+})(({ theme, open }: {
+  theme: Theme,
+  open: boolean
+}) => ({
   transition: theme.transitions.create(["width", "margin"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -105,8 +120,11 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
+  shouldForwardProp: (prop: string) => prop !== "open",
+})(({ theme, open }: {
+  theme: Theme,
+  open?: boolean
+}): any => ({
   width: drawerWidth,
   flexShrink: 0,
 
@@ -120,22 +138,26 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-const NavBar = ({ title, content }, props) => {
-  const theme = useTheme();
-  const [open, setOpen] = useState(false);
+const NavBar = ({ title, content }: {
+  title: string,
+  content: ReactElement<any, any>
+}): ReactElement<any, any> => {
+  const theme = useTheme<Theme>();
+  const [open, setOpen] = useState<boolean>(false);
 
-  const handleDrawerOpen = () => {
+  const handleDrawerOpen = (): void => {
     setOpen(true);
   };
 
-  const handleDrawerClose = () => {
+  const handleDrawerClose = (): void => {
     setOpen(false);
   };
-  const drawerContent = (
+  
+  const drawerContent: ReactElement<any, any> = (
     <div>
       <List>
         <>
-          {navList.map((route, index) => (
+          {navList.map((route: NavRoute, index: number): ReactElement<any, any> => (
             <Fragment key={index}>
               <ListItem
                 button
@@ -155,7 +177,7 @@ const NavBar = ({ title, content }, props) => {
                 <>
                   <Divider
                     sx={{
-                      backgroundColor: theme.palette.primary.background,
+                      backgroundColor: theme.palette.background.default,
                     }}
                   />
                   <Box
@@ -168,7 +190,7 @@ const NavBar = ({ title, content }, props) => {
               )}
               <Divider
                 style={{
-                  backgroundColor: theme.palette.primary.background,
+                  backgroundColor: theme.palette.background.default,
                 }}
               />
             </Fragment>
@@ -176,7 +198,7 @@ const NavBar = ({ title, content }, props) => {
           <ListItem sx={{ justifyContent: "center" }}>
             <Divider
               sx={{
-                backgroundColor: theme.palette.primary.background,
+                backgroundColor: theme.palette.background.default,
               }}
             />
             <img
@@ -195,10 +217,10 @@ const NavBar = ({ title, content }, props) => {
       <Box sx={{ display: "flex", padding: 0}}>
         <Box sx={{ display: { xs: "none", sm: "block" }, width: 0 }}>
           <CssBaseline />
-          <AppBar position="fixed" open={open}>
-            <Toolbar sx={theme.typography.title}>
+          <AppBar theme={theme} position="fixed" open={open}>
+            <Toolbar sx={theme.typography.h1}>
               {title ?? (
-                <Typography variant="title">
+                <Typography component="title">
                   Multiplied By <Typography variant="caption">One</Typography>
                 </Typography>
               )}
@@ -230,13 +252,13 @@ const NavBar = ({ title, content }, props) => {
                   color="inherit"
                   aria-label="open drawer"
                   onClick={!open ? handleDrawerOpen : handleDrawerClose}
-                  edge="center"
+                  edge={false}
                 >
                   {open ? <CloseIcon /> : <MenuIcon />}
                 </IconButton>
               </DrawerHeader>
               <Divider
-                style={{ backgroundColor: theme.palette.primary.background }}
+                style={{ backgroundColor: theme.palette.background.default }}
               />
 
               {open && drawerContent}
@@ -253,10 +275,6 @@ const NavBar = ({ title, content }, props) => {
       </Box>
     </>
   );
-};
-
-NavBar.propTypes = {
-  title: PropTypes.node,
 };
 
 export default NavBar;

@@ -1,7 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 
 export default createTheme({
-  themeName: "MBO Base",
   typography: {
     h6: {
       fontFamily: "Walter Turncoat",
@@ -15,10 +14,6 @@ export default createTheme({
     caption: {
       fontFamily: "Funky Olive",
       fontSize: "inherit",
-    },
-    title: {
-      fontFamily: "Walter Turncoat",
-      fontSize: "1.8rem",
     },
   },
 });
